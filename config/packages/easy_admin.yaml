@@ -1,0 +1,227 @@
+easy_admin:
+    site_name: 'Administration du site du CASC'
+    show:
+        max_results: 20
+    design:
+        brand_color: 'rgba(26, 188, 156, 0.85)'
+        assets:
+            css:
+            js:
+            favicon: '/assets/backend/favicon.png'
+        menu:
+            - {label: 'Site'}
+            - {entity: 'Homepage', icon: 'home', params: {}}
+            - {entity: 'Cascade', params: {}}
+            - {entity: 'Event', params: {}}
+            - {label: 'Objets'}
+            - {entity: 'Illustration', params: {}}
+            - {entity: 'Program', params: {}}
+            - {entity: 'Notification', params: {}}
+            - {entity: 'Menu', params: {}}
+            - {label: 'Utilisateurs'}
+            - {entity: 'User', icon: 'user', params: {}}
+    list:
+        actions:
+            - {name: 'edit', icon: 'pencil', label: false, title: 'Edit'}
+            - {name: 'delete', icon: 'remove', label: false, title: 'Delete'}
+    formats:
+        date:     'd/m/Y'
+        time:     'H:i'
+        datetime: 'd/m/Y'
+        number: '%.2f'
+    entities:
+        # List the entity class name you want to manage
+        #Event:
+        #    class: App\Entity\Site\Event
+        #    label: 'Evénement'
+        #    help: 'Gestion des événements'
+        #    list:
+        #        title: 'Liste des événements'
+        #    form:
+        #        title: 'Ajout événement'
+        #        form_options: { validation_groups: ['Default'] }
+        #        fields:
+        #            - id
+        #            - {property: 'images', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Objet\Illustration' }}
+        #            - { property: 'libelle', icon: 'customer'}
+        #            - { property: 'type', icon: 'customer'}
+        #            - { property: 'agence', icon: 'customer'}
+        #            - { property: 'resume', type: 'fos_ckeditor', type_options: { config_name: 'simple_config' } }
+        #            - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'full_config' }, css_class: 'event description' }
+        #            - { property: 'start', icon: 'customer', type_options: { widget: 'choice' } }
+        #            - { property: 'end', icon: 'customer', type_options: { widget: 'single_text' } }
+        #            - {property: 'country'}
+        #            - {property: 'cascades', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Site\Cascade' }}
+        #    new:
+        #        help: 'Evénements : ajout'
+        #        form_options: { validation_groups: ['Default', 'Event'] }
+        #        fields:
+        #            - '-id'
+        #    edit:
+        #        help: 'Evénements : modification'
+        #        title: 'Edit événement'
+        #        fields:
+        #            - '-id'
+        Homepage:
+            show:
+                max_results: 5
+            class: App\Entity\Site\Homepage
+            label: "Page d'accueil"
+            list:
+                title: "Liste des pages d'accueil"
+            form:
+                title: "Ajout d'une nouvelle page d'accueil"
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - id
+                    - {property: 'libelle', icon: 'customer'}
+                    - {property: 'titre', icon: 'customer'}
+                    - {property: 'resume', label: 'Sous-titre'}
+                    - {property: 'description', type: 'fos_ckeditor'}
+        #Cascade:
+        #    class: App\Entity\Site\Cascade
+        #    label: 'Les Cascades'
+        #    list:
+        #        title: "Liste des cascades"
+        #    form:
+        #        title: 'Ajout Cascade'
+        #        form_options: { validation_groups: ['Default'] }
+        #        fields:
+        #            - {type: 'group', columns: 2, label: 'Information de base'}
+        #            - id
+        #            - {property: 'libelle', icon: 'customer'}
+        #            #- {type: 'group', label: 'Présentation'}
+        #            #- {property: 'presentation', type: 'fos_ckeditor'}
+        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
+        #    new:
+        #        help: 'Cascade : ajout'
+        #        form_options: { validation_groups: ['Default', 'Event'] }
+        #        fields:
+        #            - '-id'
+        #    edit:
+        #        help: 'Cascade : modification'
+        #        title: 'Edit événement'
+        #        fields:
+        #            - '-id'
+        #Illustration:
+        #    class: App\Entity\Objet\Illustration
+        #    label: 'Mes images'
+        #    list:
+        #        title: 'Liste des images'
+        #    form:
+        #        title: "Ajout d'une image"
+        #        form_options: { validation_groups: ['Default'] }
+        #        fields:
+        #            - {type: 'group', columns: 2, label: 'Informations de base'}
+        #            - id
+        #            - {type: 'group', label: 'Informations relatives au fichier'}
+        #            #- {property: 'image', type: 'file'}
+        #            - {property: 'imageFile', type: 'vich_image'}
+        #            - {property: 'updatedAt'}
+        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
+        #    new:
+        #        help: 'Image : ajout'
+        #        form_options: { validation_groups: ['Default', 'Event'] }
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        #    edit:
+        #        help: 'Image : modification'
+        #        title: 'Edit événement'
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        #Program:
+        #    class: App\Entity\Objet\Program
+        #    label: 'Mes programmes'
+        #    list:
+        #        title: 'Liste des programmes'
+        #    form:
+        #        title: "Ajout d'une programme"
+        #        form_options: { validation_groups: ['Default'] }
+        #        fields:
+        #            - {type: 'group', columns: 2, label: 'Informations de base'}
+        #            - id
+        #            - {property: 'libelle', icon: 'customer'}
+        #            - {property: 'libelle', icon: 'customer'}
+        #            - {type: 'group', label: 'Informations relatives au fichier'}
+        #            #- {property: 'image', type: 'file'}
+        #            - {property: 'imageFile', type: 'vich_image'}
+        #            - {property: 'updatedAt'}
+        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
+        #    new:
+        #        help: 'Programme : ajout'
+        #        form_options: { validation_groups: ['Default', 'Event'] }
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        #    edit:
+        #        help: 'Programme : modification'
+        #        title: 'Edit Programme'
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        #Notification:
+        #    class: App\Entity\Objet\Notification
+        #    label: 'Mes notifications'
+        #    list:
+        #        title: 'Liste des notifications'
+        #    form:
+        #        title: "Ajout d'une notifications"
+        #        form_options: { validation_groups: ['Default'] }
+        #        fields:
+        #            - {type: 'tab', columns: 2, label: 'Informations de base'}
+        #            - id
+        #            - {property: 'libelle', icon: 'customer'}
+        #            - {property: 'reference', icon: 'customer'}
+        #            - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'full_config' }, css_class: 'event description' }
+        #            - {type: 'tab', label: 'Evénements associés'}
+        #            - {property: 'event', label: 'Evénements', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Site\Event' }}
+        #    new:
+        #        help: 'Notification : ajout'
+        #        form_options: { validation_groups: ['Default', 'Event'] }
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        #    edit:
+        #        help: 'Notification : modification'
+        #        title: 'Edit notification'
+        #        fields:
+        #            - '-id'
+        #            - '-updatedAt'
+        User:
+            class: App\Entity\Objet\User
+            label: 'Utilisateurs'
+            list:
+                title: 'Liste des utilisateurs'
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Agent': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN' } } }
+            edit:
+                form_options: { validation_groups: ['Profile'] }
+            new:
+                fields:
+                    - { property: 'plainPassword', type_options: { required: true} }
+                form_options: { validation_groups: ['Registration'] }
+        Menu:
+            class: App\Entity\Objet\Menu
+            label: 'Entrés de menu'
+            list:
+                title: 'Liste des menus'
+            form:
+                fields:
+                    - libelle
+                    - lien
+                    - { property: 'categorie', type: 'choice', type_options: { multiple: false, choices: { 'Principale': 'main', 'Secondaire': 'second' } } }
+                    - { property: 'type', type: 'choice', type_options: { multiple: false, choices: { 'Lien': 'lien', 'Libelle': 'libelle' } } }
+                    - rang
+            edit:
+                form_options: { validation_groups: ['Default'] }
+            new:
+                form_options: { validation_groups: ['Default'] }

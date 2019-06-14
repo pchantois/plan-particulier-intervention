@@ -1,0 +1,95 @@
+.sectionHead{
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	text-align: right;
+	background-image:radial-gradient(yellow, white);
+	height:100%;
+	font-weight:bold;
+	position: relative;
+	padding: 0 0 10px 0;
+	width: 2.25%;
+	margin: 0px;
+}
+.notifications{
+	position: relative;
+	width: 20%;
+	height: 100%;
+	vertical-align: bottom;
+	margin: 0;
+	padding: 0px;
+}
+.notifications article{
+	position: relative;
+	margin: 0;
+	padding: 10px;
+	font-size: 80%;
+}
+.notifications article h4{
+	margin: 0 0 0.25em 0;
+	text-decoration: underline;
+	text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+}
+.notifications article p{
+	margin: 0;
+	letter-spacing: -0.05em;
+	text-shadow: 0 1px 2px #555;
+}
+.sectionInfo{
+	position: relative;
+	width: 70%;
+	padding: 20px;
+}
+.sectionInfo article header{
+	text-shadow: 1px 1px 2px red, 0 0 1em black, 0 0 0.2em black;
+}
+.sectionInfo p {
+	margin: 0;
+}
+.sectionDate{
+	position: relative;
+}
+.hDate{
+	font-weight:bold;
+}
+.articleLeft{
+}
+.articleRight{
+}
+
+.main_content, .main_content section {
+	float: left;
+}
+
+.main_content {
+	width: 100%;
+	margin: 0px;
+	height: 100%;
+}
+
+#footer {
+	float: left;
+	width: 100%;
+}
+
+.no-sidebar {
+	height: 100%;
+}
+/*
+.page-wrapper {
+	height: 100%;
+}*/
+
+/*
+Gestion des événements
+ */
+.event .type, .event .agence, .event .sectionDate {
+	text-shadow: 0 1px 2px #555;
+	font-weight: bold;
+	font-style: italic;
+}
+.event .sectionDate {
+	margin-bottom: 1em;
+}
+/*
+Fin - Gestion des événements
+ */

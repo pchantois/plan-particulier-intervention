@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+                <div class="wrapper style1">
+
+                    <div class="container">
+
+    <h1>Homepage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ homepage.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ homepage.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ homepage.titre }}</td>
+            </tr>
+            <tr>
+                <th>Resume</th>
+                <td>{{ homepage.resume }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ homepage.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('site_homepage_index') }}">back to list</a>
+
+    <a href="{{ path('site_homepage_edit', {'id': homepage.id}) }}">edit</a>
+
+    {{ include('site_homepage/_delete_form.html.twig') }}
+</div>
+</div>
+{% endblock %}
