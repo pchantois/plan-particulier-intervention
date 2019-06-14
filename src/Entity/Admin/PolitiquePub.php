@@ -19,11 +19,6 @@ class PolitiquePub
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $code;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $libelle;

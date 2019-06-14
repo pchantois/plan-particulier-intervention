@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Code</th>
                 <th>Libelle</th>
                 <th>actions</th>
             </tr>
@@ -18,7 +17,6 @@
         {% for politique_pub in politique_pubs %}
             <tr>
                 <td>{{ politique_pub.id }}</td>
-                <td>{{ politique_pub.code }}</td>
                 <td>{{ politique_pub.libelle }}</td>
                 <td>
                     <a href="{{ path('admin_politique_pub_show', {'id': politique_pub.id}) }}">show</a>

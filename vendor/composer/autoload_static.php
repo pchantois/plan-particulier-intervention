@@ -138,6 +138,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
+        'B' => 
+        array (
+            'Box\\Spout\\' => 10,
+        ),
         'A' => 
         array (
             'App\\Tests\\' => 10,
@@ -494,6 +498,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         'Doctrine\\Bundle\\DoctrineBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
+        ),
+        'Box\\Spout\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/box/spout/src/Spout',
         ),
         'App\\Tests\\' => 
         array (
