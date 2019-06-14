@@ -10,13 +10,13 @@ easy_admin:
             favicon: '/assets/backend/favicon.png'
         menu:
             - {label: 'Site'}
-            - {entity: 'Homepage', icon: 'home', params: {}}
-            - {entity: 'Cascade', params: {}}
-            - {entity: 'Event', params: {}}
             - {label: 'Objets'}
-            - {entity: 'Illustration', params: {}}
-            - {entity: 'Program', params: {}}
-            - {entity: 'Notification', params: {}}
+            - {entity: 'Operation', params: {}}
+            - {entity: 'RegroupementOpe', params: {}}
+            - {entity: 'Quartier', params: {}}
+            - {entity: 'CodeMaire', params: {}}
+            - {entity: 'NatureOpe', params: {}}
+            - {entity: 'PolitiquePub', params: {}}
             - {entity: 'Menu', params: {}}
             - {label: 'Utilisateurs'}
             - {entity: 'User', icon: 'user', params: {}}
@@ -31,136 +31,116 @@ easy_admin:
         number: '%.2f'
     entities:
         # List the entity class name you want to manage
-        #Event:
-        #    class: App\Entity\Site\Event
-        #    label: 'Evénement'
-        #    help: 'Gestion des événements'
-        #    list:
-        #        title: 'Liste des événements'
-        #    form:
-        #        title: 'Ajout événement'
-        #        form_options: { validation_groups: ['Default'] }
-        #        fields:
-        #            - id
-        #            - {property: 'images', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Objet\Illustration' }}
-        #            - { property: 'libelle', icon: 'customer'}
-        #            - { property: 'type', icon: 'customer'}
-        #            - { property: 'agence', icon: 'customer'}
-        #            - { property: 'resume', type: 'fos_ckeditor', type_options: { config_name: 'simple_config' } }
-        #            - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'full_config' }, css_class: 'event description' }
-        #            - { property: 'start', icon: 'customer', type_options: { widget: 'choice' } }
-        #            - { property: 'end', icon: 'customer', type_options: { widget: 'single_text' } }
-        #            - {property: 'country'}
-        #            - {property: 'cascades', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Site\Cascade' }}
-        #    new:
-        #        help: 'Evénements : ajout'
-        #        form_options: { validation_groups: ['Default', 'Event'] }
-        #        fields:
-        #            - '-id'
-        #    edit:
-        #        help: 'Evénements : modification'
-        #        title: 'Edit événement'
-        #        fields:
-        #            - '-id'
-        Homepage:
-            show:
-                max_results: 5
-            class: App\Entity\Site\Homepage
-            label: "Page d'accueil"
+        Quartier:
+            class: App\Entity\Admin\Quartier
+            label: 'Quartier'
+            help: 'Gestion des quartiers'
             list:
-                title: "Liste des pages d'accueil"
+                title: 'Liste des quartiers'
             form:
-                title: "Ajout d'une nouvelle page d'accueil"
+                title: 'Ajout quartier'
                 form_options: { validation_groups: ['Default'] }
                 fields:
                     - id
-                    - {property: 'libelle', icon: 'customer'}
-                    - {property: 'titre', icon: 'customer'}
-                    - {property: 'resume', label: 'Sous-titre'}
-                    - {property: 'description', type: 'fos_ckeditor'}
-        #Cascade:
-        #    class: App\Entity\Site\Cascade
-        #    label: 'Les Cascades'
-        #    list:
-        #        title: "Liste des cascades"
-        #    form:
-        #        title: 'Ajout Cascade'
-        #        form_options: { validation_groups: ['Default'] }
-        #        fields:
-        #            - {type: 'group', columns: 2, label: 'Information de base'}
-        #            - id
-        #            - {property: 'libelle', icon: 'customer'}
-        #            #- {type: 'group', label: 'Présentation'}
-        #            #- {property: 'presentation', type: 'fos_ckeditor'}
-        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
-        #    new:
-        #        help: 'Cascade : ajout'
-        #        form_options: { validation_groups: ['Default', 'Event'] }
-        #        fields:
-        #            - '-id'
-        #    edit:
-        #        help: 'Cascade : modification'
-        #        title: 'Edit événement'
-        #        fields:
-        #            - '-id'
-        #Illustration:
-        #    class: App\Entity\Objet\Illustration
-        #    label: 'Mes images'
-        #    list:
-        #        title: 'Liste des images'
-        #    form:
-        #        title: "Ajout d'une image"
-        #        form_options: { validation_groups: ['Default'] }
-        #        fields:
-        #            - {type: 'group', columns: 2, label: 'Informations de base'}
-        #            - id
-        #            - {type: 'group', label: 'Informations relatives au fichier'}
-        #            #- {property: 'image', type: 'file'}
-        #            - {property: 'imageFile', type: 'vich_image'}
-        #            - {property: 'updatedAt'}
-        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
-        #    new:
-        #        help: 'Image : ajout'
-        #        form_options: { validation_groups: ['Default', 'Event'] }
-        #        fields:
-        #            - '-id'
-        #            - '-updatedAt'
-        #    edit:
-        #        help: 'Image : modification'
-        #        title: 'Edit événement'
-        #        fields:
-        #            - '-id'
-        #            - '-updatedAt'
-        #Program:
-        #    class: App\Entity\Objet\Program
-        #    label: 'Mes programmes'
-        #    list:
-        #        title: 'Liste des programmes'
-        #    form:
-        #        title: "Ajout d'une programme"
-        #        form_options: { validation_groups: ['Default'] }
-        #        fields:
-        #            - {type: 'group', columns: 2, label: 'Informations de base'}
-        #            - id
-        #            - {property: 'libelle', icon: 'customer'}
-        #            - {property: 'libelle', icon: 'customer'}
-        #            - {type: 'group', label: 'Informations relatives au fichier'}
-        #            #- {property: 'image', type: 'file'}
-        #            - {property: 'imageFile', type: 'vich_image'}
-        #            - {property: 'updatedAt'}
-        #            #- {property: 'evenements', type: 'easyadmin_autocomplete'}
-        #    new:
-        #        help: 'Programme : ajout'
-        #        form_options: { validation_groups: ['Default', 'Event'] }
-        #        fields:
-        #            - '-id'
-        #            - '-updatedAt'
-        #    edit:
-        #        help: 'Programme : modification'
-        #        title: 'Edit Programme'
-        #        fields:
-        #            - '-id'
-        #            - '-updatedAt'
+                    #- {property: 'images', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Objet\Illustration' }}
+                    - { property: 'libelle'}
+                    - { property: 'code'}
+            new:
+                help: 'Quartier : ajout'
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - '-id'
+            edit:
+                help: 'Quartier : modification'
+                title: 'Edit quartier'
+                fields:
+                    - '-id'
+        CodeMaire:
+            show:
+                max_results: 5
+            class: App\Entity\Admin\CodeMaire
+            label: "Code Maire"
+            list:
+                title: "Liste des CodeMaire"
+            form:
+                title: "Ajout d'un nouveau CodeMaire"
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - { property: 'libelle'}
+                    - { property: 'code'}
+        NatureOpe:
+            show:
+                max_results: 5
+            class: App\Entity\Admin\NatureOpe
+            label: "NatureOpe"
+            list:
+                title: "Liste des NatureOpe"
+            form:
+                title: "Ajout d'un nouveau NatureOpe"
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - { property: 'libelle'}
+        PolitiquePub:
+            show:
+                max_results: 5
+            class: App\Entity\Admin\PolitiquePub
+            label: "PolitiquePub"
+            list:
+                title: "Liste des PolitiquePub"
+            form:
+                title: "Ajout d'un nouveau PolitiquePub"
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - { property: 'libelle'}
+                    - { property: 'code'}
+        RegroupementOpe:
+            show:
+                max_results: 5
+            class: App\Entity\Admin\RegroupementOpe
+            label: "RegroupementOpe"
+            list:
+                title: "Liste des RegroupementOpe"
+            form:
+                title: "Ajout d'un nouveau RegroupementOpe"
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - { property: 'libelle'}
+                    #- {property: 'evenements', type: 'easyadmin_autocomplete'}
+        Operation:
+            class: App\Entity\Admin\Operation
+            label: 'Les Opérations'
+            list:
+                title: "Liste des Opérations"
+            form:
+                title: 'Ajout Opération'
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - {type: 'group', columns: 2, label: 'Information de base'}
+                    - id
+                    - {property: 'code'}
+                    - {property: 'libelle'}
+                    - {property: 'description'}
+                    - {property: 'commentaire'}
+                    - {property: 'annee'}
+                    - {property: 'type'}
+                    - {property: 'montant'}
+                    #- {type: 'group', label: 'Présentation'}
+                    #- {property: 'presentation', type: 'fos_ckeditor'}
+                    - {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
+                    - {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
+                    - {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
+                    - {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
+                    - {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
+            new:
+                help: 'Opération : ajout'
+                form_options: { validation_groups: ['Default', 'Event'] }
+                fields:
+                    - '-id'
+            edit:
+                help: 'Opération : modification'
+                title: 'Edit Opération'
+                fields:
+                    - '-id'
         #Notification:
         #    class: App\Entity\Objet\Notification
         #    label: 'Mes notifications'

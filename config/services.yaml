@@ -34,8 +34,3 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
-
-    # calendrier
-    App\EventListener\FullCalendarListener:
-        tags:
-            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadEvents }

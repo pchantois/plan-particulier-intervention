@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Operation index{% endblock %}
+
+{% block body %}
+    <h1>Operation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Libelle</th>
+                <th>Description</th>
+                <th>Commentaire</th>
+                <th>Montant</th>
+                <th>Annee</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operation in operations %}
+            <tr>
+                <td>{{ operation.id }}</td>
+                <td>{{ operation.code }}</td>
+                <td>{{ operation.libelle }}</td>
+                <td>{{ operation.description }}</td>
+                <td>{{ operation.commentaire }}</td>
+                <td>{{ operation.montant }}</td>
+                <td>{{ operation.annee ? operation.annee|date('Y-m-d') : '' }}</td>
+                <td>{{ operation.type ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('admin_operation_show', {'id': operation.id}) }}">show</a>
+                    <a href="{{ path('admin_operation_edit', {'id': operation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_operation_new') }}">Create new</a>
+{% endblock %}
