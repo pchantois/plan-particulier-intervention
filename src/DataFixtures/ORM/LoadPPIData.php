@@ -1,4 +1,4 @@
-<?php //src/DataFixtures/ORM/LoadCategoryData.php
+<?php //src/DataFixtures/ORM/LoadPPIData.php
 
 namespace App\DataFixtures\ORM;
 
@@ -9,14 +9,13 @@ use App\Entity\Admin\PolitiquePub;
 use App\Entity\Admin\Quartier;
 use App\Entity\Admin\RegroupementOpe;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\ReaderFactory;
 
-class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
+class LoadPPIData extends Fixture
 {
     public function load(ObjectManager $manager)
     {

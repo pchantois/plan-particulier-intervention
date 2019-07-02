@@ -1,14 +1,14 @@
-<?php //src/DataFixtures/ORM/LoadCategoryData.php
+<?php //src/DataFixtures/ORM/LoadUserData.php
 
 namespace App\DataFixtures\ORM;
 
 use App\Entity\Objet\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserData extends Fixture
 {    private $passwordEncoder;
  
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/operation")
+ * @Route("/operation")
  */
 class OperationController extends AbstractController
 {
