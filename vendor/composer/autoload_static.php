@@ -12,6 +12,7 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
 
@@ -43,7 +44,9 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Flex\\' => 13,
+            'Symfony\\Contracts\\' => 18,
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\WebLink\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
@@ -100,11 +103,13 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
+            'Pagerfanta\\' => 11,
             'PackageVersions\\' => 16,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
         ),
         'J' => 
         array (
@@ -128,8 +133,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
             'Doctrine\\Migrations\\' => 20,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\DBAL\\' => 14,
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\DataFixtures\\' => 29,
+            'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
@@ -192,9 +199,17 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
         'Symfony\\Flex\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/flex/src',
+        ),
+        'Symfony\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/contracts',
         ),
         'Symfony\\Component\\Yaml\\' => 
         array (
@@ -408,6 +423,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Pagerfanta\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/src/Pagerfanta',
+        ),
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
@@ -415,6 +434,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
         ),
         'JavierEguiluz\\Bundle\\EasyAdminBundle\\' => 
         array (
@@ -460,6 +483,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
         ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+        ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
@@ -467,6 +494,10 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         'Doctrine\\Common\\DataFixtures\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/data-fixtures/lib/Doctrine/Common/DataFixtures',
+        ),
+        'Doctrine\\Common\\Collections\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
         ),
         'Doctrine\\Common\\Cache\\' => 
         array (
@@ -530,28 +561,6 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
             'ProxyManager\\' => 
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
-            ),
-            'Pagerfanta\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/src',
-            ),
-        ),
-        'M' => 
-        array (
-            'Metadata\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/jms/metadata/src',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
-            'Doctrine\\Common\\Collections\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
         ),
         'B' => 

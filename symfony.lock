@@ -191,6 +191,9 @@
             "ref": "b5026d7ffdb43b4d66f4cc091b1e6f94e6023986"
         }
     },
+    "symfony/contracts": {
+        "version": "v1.1.5"
+    },
     "symfony/css-selector": {
         "version": "v4.1.7"
     },
@@ -304,6 +307,9 @@
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
+    },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.11.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"

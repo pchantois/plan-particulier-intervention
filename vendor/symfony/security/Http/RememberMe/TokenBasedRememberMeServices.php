@@ -80,8 +80,10 @@ class TokenBasedRememberMeServices extends AbstractRememberMeServices
                 $expires,
                 $this->options['path'],
                 $this->options['domain'],
-                $this->options['secure'],
-                $this->options['httponly']
+                $this->options['secure'] ?? $request->isSecure(),
+                $this->options['httponly'],
+                false,
+                $this->options['samesite'] ?? null
             )
         );
     }
@@ -120,6 +122,6 @@ class TokenBasedRememberMeServices extends AbstractRememberMeServices
      */
     protected function generateCookieHash($class, $username, $expires, $password)
     {
-        return hash_hmac('sha256', $class.$username.$expires.$password, $this->getSecret());
+        return hash_hmac('sha256', $class.self::COOKIE_DELIMITER.$username.self::COOKIE_DELIMITER.$expires.self::COOKIE_DELIMITER.$password, $this->getSecret());
     }
 }
