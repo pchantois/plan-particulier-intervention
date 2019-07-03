@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Libelle</th>
+            <th>Montant</th>
+            <th>Annee</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.libelle }}</td>
+            <td>{{ item.montant }}</td>
+            <td>{{ item.annee }}</td>
+            <td>{{ item.type ? 'dépense' : 'recette' }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

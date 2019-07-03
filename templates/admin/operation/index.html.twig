@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_' ~ configs.site.theme ~ '.html.twig' %}
 
 {% block title %}Operation index{% endblock %}
 
@@ -28,8 +28,8 @@
                 <td>{{ operation.description }}</td>
                 <td>{{ operation.commentaire }}</td>
                 <td>{{ operation.montant }}</td>
-                <td>{{ operation.annee ? operation.annee|date('Y-m-d') : '' }}</td>
-                <td>{{ operation.type ? 'Yes' : 'No' }}</td>
+                <td>{{ operation.annee }}</td>
+                <td>{{ operation.type ? 'dépense' : 'recette' }}</td>
                 <td>
                     <a href="{{ path('admin_operation_show', {'id': operation.id}) }}">show</a>
                     <a href="{{ path('admin_operation_edit', {'id': operation.id}) }}">edit</a>
@@ -42,6 +42,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_operation_new') }}">Create new</a>
+    {% include "admin/operation/ppi.html.twig" with {'items': operations} %}
 {% endblock %}

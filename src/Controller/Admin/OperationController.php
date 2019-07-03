@@ -20,8 +20,17 @@ class OperationController extends AbstractController
      */
     public function index(OperationRepository $operationRepository): Response
     {
+        $operations = $operationRepository->findAll();
+
+		$configs = array(
+			'site' => [
+                'theme' => 'dimension',
+			],
+		);
+
         return $this->render('admin/operation/index.html.twig', [
-            'operations' => $operationRepository->findAll(),
+            'operations' => $operations,
+			'configs' => $configs,
         ]);
     }
 
@@ -92,5 +101,54 @@ class OperationController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_operation_index');
+    }
+
+    protected function ppi(OperationRepository $operationRepository)
+    {
+        $operations = $operationRepository->findAll();
+        $libelleAnnee = array();
+
+        // construction du tableau des PPI
+        foreach($operations as $operation)
+        {
+            $ppi = array();
+            $libelle = $operation->getLibelle();
+            $annee = $operation->getAnnee();
+            $compte = ($operation->getType() ? 'depense' : 'recette' );
+
+            if (!isset($ppi[$libelle][$annee][$compte]))
+            {
+                $ppi[$libelle][$annee]['depense'] = 0;
+                $ppi[$libelle][$annee]['recette'] = 0;
+            }
+            $ppi[$libelle][$annee][$compte] += $operation->getMontant();
+
+            $libelleAnnee[] = $annee;
+        }
+        
+        $libelleAnnee2 = array_sort(array_unique($libelleAnnee));
+
+        foreach($ppi as $key => $value)
+        {
+            foreach($libelleAnnee2 as $item)
+            {
+                if (! isset($value[$item]))
+                {
+                    $ppi[$key][$item]['depense'] = 0;
+                    $ppi[$key][$item]['recette'] = 0;
+                }
+            }
+        }
+/*
+		$configs = array(
+			'site' => [
+				'theme' => 'dimension',
+			],
+        );*/
+
+        return $this->render('admin/operation/ppi.html.twig', [
+            'items' => $ppi,
+			//'configs' => $configs,
+        ]);
     }
 }

@@ -42,7 +42,7 @@ class Operation
     private $montant;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=4)
      */
     private $annee;
 
@@ -141,12 +141,12 @@ class Operation
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee(): ?string
     {
         return $this->annee;
     }
 
-    public function setAnnee(?\DateTimeInterface $annee): self
+    public function setAnnee(?string $annee): self
     {
         $this->annee = $annee;
 

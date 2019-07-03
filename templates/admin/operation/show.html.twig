@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_' ~ configs.site.theme ~ '.html.twig' %}
 
 {% block title %}Operation{% endblock %}
 
@@ -33,18 +33,14 @@
             </tr>
             <tr>
                 <th>Annee</th>
-                <td>{{ operation.annee ? operation.annee|date('Y-m-d') : '' }}</td>
+                <td>{{ operation.annee }}</td>
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ operation.type ? 'Yes' : 'No' }}</td>
+                <td>{{ operation.type ? 'dépense' : 'recette' }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
-
-    <a href="{{ path('admin_operation_edit', {'id': operation.id}) }}">edit</a>
-
-    {{ include('admin_operation/_delete_form.html.twig') }}
 {% endblock %}
