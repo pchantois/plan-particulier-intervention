@@ -30,6 +30,7 @@ class OperationController extends AbstractController
 
         return $this->render('admin/operation/index.html.twig', [
             'operations' => $operations,
+            'ppi'  => $this->ppi($operations),
 			'configs' => $configs,
         ]);
     }
@@ -103,41 +104,40 @@ class OperationController extends AbstractController
         return $this->redirectToRoute('admin_operation_index');
     }
 
-    protected function ppi(OperationRepository $operationRepository)
+    protected function ppi(Array $operations)
     {
-        $operations = $operationRepository->findAll();
         $libelleAnnee = array();
+        $ppi = array();
 
         // construction du tableau des PPI
         foreach($operations as $operation)
         {
-            $ppi = array();
             $libelle = $operation->getLibelle();
             $annee = $operation->getAnnee();
             $compte = ($operation->getType() ? 'depense' : 'recette' );
 
-            if (!isset($ppi[$libelle][$annee][$compte]))
+            if (! isset($ppi[$libelle][$annee][$compte]))
             {
-                $ppi[$libelle][$annee]['depense'] = 0;
-                $ppi[$libelle][$annee]['recette'] = 0;
+                $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
             }
             $ppi[$libelle][$annee][$compte] += $operation->getMontant();
 
             $libelleAnnee[] = $annee;
         }
         
-        $libelleAnnee2 = array_sort(array_unique($libelleAnnee));
+        $libelleAnnee = array_unique($libelleAnnee);
 
         foreach($ppi as $key => $value)
         {
-            foreach($libelleAnnee2 as $item)
+            foreach($libelleAnnee as $item)
             {
-                if (! isset($value[$item]))
+                if (! isset($ppi[$key][$item]))
                 {
                     $ppi[$key][$item]['depense'] = 0;
                     $ppi[$key][$item]['recette'] = 0;
                 }
             }
+            ksort($ppi[$key]);
         }
 /*
 		$configs = array(
@@ -146,9 +146,10 @@ class OperationController extends AbstractController
 			],
         );*/
 
-        return $this->render('admin/operation/ppi.html.twig', [
+        return $ppi;
+        /*return $this->render('admin/operation/ppi.html.twig', [
             'items' => $ppi,
 			//'configs' => $configs,
-        ]);
+        ]);*/
     }
 }

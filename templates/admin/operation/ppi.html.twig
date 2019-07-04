@@ -2,18 +2,28 @@
     <thead>
         <tr>
             <th>Libelle</th>
-            <th>Montant</th>
-            <th>Annee</th>
+            {% for annee in items|first|keys %}
+            <th colspan="2">{{annee}}</th>
+            {% endfor %}
+            <th>Type</th>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            {% for annee in items|first|keys %}
+            <th>depense</th>
+            <th>recette</th>
+            {% endfor %}
             <th>Type</th>
         </tr>
     </thead>
     <tbody>
-    {% for item in items %}
+    {% for libelle, item in items %}
         <tr>
-            <td>{{ item.libelle }}</td>
-            <td>{{ item.montant }}</td>
-            <td>{{ item.annee }}</td>
-            <td>{{ item.type ? 'dépense' : 'recette' }}</td>
+            <td>{{ libelle }}</td>
+            {% for operation in item %}
+            <td>{{ operation.depense }}</td>
+            <td>{{ operation.recette }}</td>
+            {% endfor %}
         </tr>
     {% else %}
         <tr>
