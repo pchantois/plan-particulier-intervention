@@ -16,24 +16,19 @@
                 <th>Montant</th>
                 <th>Annee</th>
                 <th>Type</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for operation in operations %}
             <tr>
-                <td>{{ operation.id }}</td>
-                <td>{{ operation.code }}</td>
-                <td>{{ operation.libelle }}</td>
+                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.id }}</a></td>
+                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.code }}</a></td>
+                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a></td>
                 <td>{{ operation.description }}</td>
                 <td>{{ operation.commentaire }}</td>
                 <td>{{ operation.montant }}</td>
                 <td>{{ operation.annee }}</td>
                 <td>{{ operation.type ? 'dépense' : 'recette' }}</td>
-                <td>
-                    <a href="{{ path('admin_operation_show', {'id': operation.id}) }}">show</a>
-                    <a href="{{ path('admin_operation_edit', {'id': operation.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -42,5 +37,6 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include "admin/operation/ppi.html.twig" with {'items': ppi} %}
+    {% include "admin/operation/ppi_global.html.twig" with {'items': ppi} %}
+    {% include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi2} %}
 {% endblock %}

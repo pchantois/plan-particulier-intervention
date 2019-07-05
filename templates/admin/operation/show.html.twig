@@ -3,44 +3,23 @@
 {% block title %}Operation{% endblock %}
 
 {% block body %}
+    <article>
+        <header>{{ operation.libelle }}</header>
+        <p id="reference">Département XXX - Direction XXX</p>
+        <section class="description">
+            <header>description de l’opération d’investissement</header>
+            <p>{{ operation.description }}</p>
+        </section>
+        <section class="estimation">
+            <header>estimation du coût de l’opération</header>
+            <p>{% include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi} %}</p>
+        </section>
+        <section class="notifications">
+            <header>remarques</header>
+            <p>{{ operation.commentaire }}</p>
+        </section>
+    </article>
     <h1>Operation</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ operation.id }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ operation.code }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ operation.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ operation.description }}</td>
-            </tr>
-            <tr>
-                <th>Commentaire</th>
-                <td>{{ operation.commentaire }}</td>
-            </tr>
-            <tr>
-                <th>Montant</th>
-                <td>{{ operation.montant }}</td>
-            </tr>
-            <tr>
-                <th>Annee</th>
-                <td>{{ operation.annee }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ operation.type ? 'dépense' : 'recette' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
 {% endblock %}

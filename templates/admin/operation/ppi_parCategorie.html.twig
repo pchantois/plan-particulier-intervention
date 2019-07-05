@@ -1,19 +1,10 @@
-<table class="table">
+<table class="ppiParCategorie">
     <thead>
         <tr>
-            <th>Libelle</th>
+            <th rowspan="2">libelle</th>
             {% for annee in items|first|keys %}
-            <th colspan="2">{{annee}}</th>
+            <th>{{annee}}</th>
             {% endfor %}
-            <th>Type</th>
-        </tr>
-        <tr>
-            <th>Libelle</th>
-            {% for annee in items|first|keys %}
-            <th>depense</th>
-            <th>recette</th>
-            {% endfor %}
-            <th>Type</th>
         </tr>
     </thead>
     <tbody>
@@ -21,8 +12,7 @@
         <tr>
             <td>{{ libelle }}</td>
             {% for operation in item %}
-            <td>{{ operation.depense }}</td>
-            <td>{{ operation.recette }}</td>
+            <td>{{ operation }}</td>
             {% endfor %}
         </tr>
     {% else %}

@@ -1,0 +1,33 @@
+<table class="ppi">
+    <thead>
+        <tr>
+            <th rowspan="2">libelle</th>
+            {% for annee in items|first|keys %}
+            <th colspan="3">{{annee}}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for annee in items|first|keys %}
+            <th>depense</th>
+            <th>recette</th>
+            <th>charge nette</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for libelle, item in items %}
+        <tr>
+            <td><a href="{{path('admin_operation_show', {'id': libelle|split('####').0})}}">{{ libelle|split('####').1 }}</a></td>
+            {% for operation in item %}
+            <td>{{ operation.depense }}</td>
+            <td>{{ operation.recette }}</td>
+            <td>{{ operation.depense - operation.recette }}</td>
+            {% endfor %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

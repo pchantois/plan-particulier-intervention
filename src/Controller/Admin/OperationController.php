@@ -30,7 +30,8 @@ class OperationController extends AbstractController
 
         return $this->render('admin/operation/index.html.twig', [
             'operations' => $operations,
-            'ppi'  => $this->ppi($operations),
+            'ppi'  => $this->ppi($operations,'global'),
+            'ppi2'  => $this->ppi($operations,'parCategorie'),
 			'configs' => $configs,
         ]);
     }
@@ -63,8 +64,15 @@ class OperationController extends AbstractController
      */
     public function show(Operation $operation): Response
     {
+		$configs = array(
+			'site' => [
+                'theme' => 'dimension',
+			],
+		);
         return $this->render('admin/operation/show.html.twig', [
             'operation' => $operation,
+            'ppi'  => $this->ppi([$operation],'parCategorie'),
+			'configs' => $configs,
         ]);
     }
 
@@ -104,7 +112,7 @@ class OperationController extends AbstractController
         return $this->redirectToRoute('admin_operation_index');
     }
 
-    protected function ppi(Array $operations)
+    protected function ppi(Array $operations, String $category)
     {
         $libelleAnnee = array();
         $ppi = array();
@@ -112,17 +120,30 @@ class OperationController extends AbstractController
         // construction du tableau des PPI
         foreach($operations as $operation)
         {
-            $libelle = $operation->getLibelle();
+            $libelle = $operation->getId() .'####'. $operation->getLibelle();
             $annee = $operation->getAnnee();
             $compte = ($operation->getType() ? 'depense' : 'recette' );
 
-            if (! isset($ppi[$libelle][$annee][$compte]))
+            switch(strtolower($category))
             {
-                $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
+                case 'parcategorie':
+                    if (! isset($ppi[$compte][$annee]))
+                    {
+                        $ppi['depense'][$annee] = $ppi['recette'][$annee] = 0;
+                    }
+                    $ppi[$compte][$annee] += $operation->getMontant();
+        
+                    $libelleAnnee[] = $annee;
+                    break;
+                default:
+                    if (! isset($ppi[$libelle][$annee][$compte]))
+                    {
+                        $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
+                    }
+                    $ppi[$libelle][$annee][$compte] += $operation->getMontant();
+        
+                    $libelleAnnee[] = $annee;
             }
-            $ppi[$libelle][$annee][$compte] += $operation->getMontant();
-
-            $libelleAnnee[] = $annee;
         }
         
         $libelleAnnee = array_unique($libelleAnnee);
@@ -131,10 +152,20 @@ class OperationController extends AbstractController
         {
             foreach($libelleAnnee as $item)
             {
-                if (! isset($ppi[$key][$item]))
+                switch(strtolower($category))
                 {
-                    $ppi[$key][$item]['depense'] = 0;
-                    $ppi[$key][$item]['recette'] = 0;
+                    case 'parcategory':
+                        if (! isset($ppi[$key][$item]))
+                        {
+                            $ppi[$key][$item] = 0;
+                        }
+                        break;
+                    default:
+                        if (! isset($ppi[$key][$item]))
+                        {
+                            $ppi[$key][$item]['depense'] = 0;
+                            $ppi[$key][$item]['recette'] = 0;
+                        }
                 }
             }
             ksort($ppi[$key]);
