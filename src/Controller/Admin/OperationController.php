@@ -71,7 +71,7 @@ class OperationController extends AbstractController
 		);
         return $this->render('admin/operation/show.html.twig', [
             'operation' => $operation,
-            'ppi'  => $this->ppi([$operation],'parCategorie'),
+            //'ppi'  => $this->ppi([$operation],'parCategorie'),
 			'configs' => $configs,
         ]);
     }
@@ -116,11 +116,12 @@ class OperationController extends AbstractController
     {
         $libelleAnnee = array();
         $ppi = array();
-
+/*
         // construction du tableau des PPI
         foreach($operations as $operation)
         {
-            $libelle = $operation->getId() .'####'. $operation->getLibelle();
+            //$libelle = $operation->getId() .'####'. $operation->getLibelle();
+            $libelle = $operation->getLibelle();
             $annee = $operation->getAnnee();
             $compte = ($operation->getType() ? 'depense' : 'recette' );
 
@@ -169,7 +170,7 @@ class OperationController extends AbstractController
                 }
             }
             ksort($ppi[$key]);
-        }
+        }*/
 /*
 		$configs = array(
 			'site' => [

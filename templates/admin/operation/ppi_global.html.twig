@@ -17,11 +17,11 @@
     <tbody>
     {% for libelle, item in items %}
         <tr>
-            <td><a href="{{path('admin_operation_show', {'id': libelle|split('####').0})}}">{{ libelle|split('####').1 }}</a></td>
+            <td><a href="">{{ libelle }}</a></td>
             {% for operation in item %}
-            <td>{{ operation.depense }}</td>
-            <td>{{ operation.recette }}</td>
-            <td>{{ operation.depense - operation.recette }}</td>
+            <td>{# operation.depense #}</td>
+            <td>{# operation.recette #}</td>
+            <td>{# operation.depense - operation.recette #}</td>
             {% endfor %}
         </tr>
     {% else %}

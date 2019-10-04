@@ -12,7 +12,6 @@
 }
 .notifications{
 	position: relative;
-	width: 20%;
 	height: 100%;
 	vertical-align: bottom;
 	margin: 0;
@@ -92,4 +91,49 @@ Gestion des événements
 }
 /*
 Fin - Gestion des événements
+ */
+
+ /*
+ Modélisation d'opération
+ */
+ /*body {
+
+	background-color : whitesmoke;
+}*/
+.operation {
+    width: 750px;
+	margin: 0 auto;
+  }
+
+.operation > header {
+	color: blue;
+	font-weight: bold;
+	text-align: left;
+    font-size: 22px;
+}
+
+.operation #reference{
+	font-size : 12px;
+	font-style: italic;	
+}
+
+.operation section header{
+	font-size : 18px;
+	color: black;
+	font-weight: bold;
+	text-decoration: underline;
+	text-transform: capitalize;
+}
+
+.operation p{
+	
+	text-align: justify;
+}
+
+.operation td {
+	
+	text-align: right;
+}
+ /*
+ Fin - Modélisation d'opération
  */

@@ -2,6 +2,8 @@
 
 namespace App\Entity\Admin;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,21 +39,6 @@ class Operation
     private $commentaire;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $montant;
-
-    /**
-     * @ORM\Column(type="string", length=4)
-     */
-    private $annee;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $type;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Admin\RegroupementOpe", inversedBy="operations")
      */
     private $regroupementOpe;
@@ -75,6 +62,26 @@ class Operation
      * @ORM\ManyToOne(targetEntity="App\Entity\Admin\PolitiquePub", inversedBy="operations")
      */
     private $politiquePub;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $dob;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $recueil;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Admin\OperationData", mappedBy="operation")
+     */
+    private $operationData;
+
+    public function __construct()
+    {
+        $this->operationData = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,42 +132,6 @@ class Operation
     public function setCommentaire(?string $commentaire): self
     {
         $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    public function getMontant(): ?int
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(?int $montant): self
-    {
-        $this->montant = $montant;
-
-        return $this;
-    }
-
-    public function getAnnee(): ?string
-    {
-        return $this->annee;
-    }
-
-    public function setAnnee(?string $annee): self
-    {
-        $this->annee = $annee;
-
-        return $this;
-    }
-
-    public function getType(): ?bool
-    {
-        return $this->type;
-    }
-
-    public function setType(?bool $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -221,6 +192,61 @@ class Operation
     public function setPolitiquePub(?PolitiquePub $PolitiquePub): self
     {
         $this->PolitiquePub = $PolitiquePub;
+
+        return $this;
+    }
+
+    public function getDob(): ?bool
+    {
+        return $this->dob;
+    }
+
+    public function setDob(bool $dob): self
+    {
+        $this->dob = $dob;
+
+        return $this;
+    }
+
+    public function getRecueil(): ?bool
+    {
+        return $this->recueil;
+    }
+
+    public function setRecueil(bool $recueil): self
+    {
+        $this->recueil = $recueil;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OperationData[]
+     */
+    public function getOperationData(): Collection
+    {
+        return $this->operationData;
+    }
+
+    public function addOperationData(OperationData $operationData): self
+    {
+        if (!$this->operationData->contains($operationData)) {
+            $this->operationData[] = $operationData;
+            $operationData->setOperation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperationData(OperationData $operationData): self
+    {
+        if ($this->operationData->contains($operationData)) {
+            $this->operationData->removeElement($operationData);
+            // set the owning side to null (unless already changed)
+            if ($operationData->getOperation() === $this) {
+                $operationData->setOperation(null);
+            }
+        }
 
         return $this;
     }

@@ -3,7 +3,7 @@
 {% block title %}Operation{% endblock %}
 
 {% block body %}
-    <article>
+    <article class="operation" id="operation">
         <header>{{ operation.libelle }}</header>
         <p id="reference">Département XXX - Direction XXX</p>
         <section class="description">
@@ -19,7 +19,6 @@
             <p>{{ operation.commentaire }}</p>
         </section>
     </article>
-    <h1>Operation</h1>
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
 {% endblock %}

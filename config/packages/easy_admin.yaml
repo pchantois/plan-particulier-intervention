@@ -126,11 +126,11 @@ easy_admin:
                     - {property: 'montant'}
                     #- {type: 'group', label: 'Présentation'}
                     #- {property: 'presentation', type: 'fos_ckeditor'}
-                    - {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
-                    - {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
-                    - {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
-                    - {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
-                    - {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
+                    #- {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
+                    #- {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
+                    #- {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
+                    #- {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
+                    #- {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
             new:
                 help: 'Opération : ajout'
                 form_options: { validation_groups: ['Default', 'Event'] }

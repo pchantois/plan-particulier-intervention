@@ -13,9 +13,6 @@
                 <th>Libelle</th>
                 <th>Description</th>
                 <th>Commentaire</th>
-                <th>Montant</th>
-                <th>Annee</th>
-                <th>Type</th>
             </tr>
         </thead>
         <tbody>
@@ -26,9 +23,6 @@
                 <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a></td>
                 <td>{{ operation.description }}</td>
                 <td>{{ operation.commentaire }}</td>
-                <td>{{ operation.montant }}</td>
-                <td>{{ operation.annee }}</td>
-                <td>{{ operation.type ? 'dépense' : 'recette' }}</td>
             </tr>
         {% else %}
             <tr>
@@ -38,5 +32,5 @@
         </tbody>
     </table>
     {% include "admin/operation/ppi_global.html.twig" with {'items': ppi} %}
-    {% include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi2} %}
+    {# include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi2} #}
 {% endblock %}

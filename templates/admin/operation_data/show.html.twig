@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OperationData{% endblock %}
+
+{% block body %}
+    <h1>OperationData</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ operation_datum.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ operation_datum.montant }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ operation_datum.annee }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ operation_datum.type ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_operation_data_index') }}">back to list</a>
+
+    <a href="{{ path('admin_operation_data_edit', {'id': operation_datum.id}) }}">edit</a>
+
+    {{ include('admin_operation_data/_delete_form.html.twig') }}
+{% endblock %}
