@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/politique/pub")
+ * @Route("/politique/pub")
  */
 class PolitiquePubController extends AbstractController
 {

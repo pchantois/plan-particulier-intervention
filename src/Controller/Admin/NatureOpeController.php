@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/nature/ope")
+ * @Route("/nature/ope")
  */
 class NatureOpeController extends AbstractController
 {
