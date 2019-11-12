@@ -137,6 +137,7 @@ class LoadPPIData extends Fixture
                     continue;
                 }
                 $item = new OperationData();
+                $item->setOperation($operation);
                 $item->setMontant(intval($data[28+$compteur]->__toString()));
                 $item->setAnnee($annee);
                 $type = !$type;
