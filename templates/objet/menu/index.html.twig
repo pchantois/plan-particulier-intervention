@@ -2,11 +2,9 @@
 <!-- Nav -->
     <nav id="nav">
         <ul>
-            <tr>
         {% for menu in menus %}
-            <li><a href="{{ path(menu.lien) }}">{{ menu.libelle|capitalize }}</a></li>
+        {% include "objet/menu/show.html.twig" with {'menu': menu} %}
         {% else %}
-            </tr>
         {% endfor %}
         </ul>
     </nav>

@@ -41,6 +41,11 @@ class Menu
      */
     private $rang;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $ref;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Menu
     public function setRang(?int $rang): self
     {
         $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(?string $ref): self
+    {
+        $this->ref = $ref;
 
         return $this;
     }

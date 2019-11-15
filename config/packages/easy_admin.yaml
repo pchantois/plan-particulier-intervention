@@ -201,6 +201,7 @@ easy_admin:
                     - { property: 'categorie', type: 'choice', type_options: { multiple: false, choices: { 'Principale': 'main', 'Secondaire': 'second' } } }
                     - { property: 'type', type: 'choice', type_options: { multiple: false, choices: { 'Lien': 'lien', 'Libelle': 'libelle' } } }
                     - rang
+                    - ref
             edit:
                 form_options: { validation_groups: ['Default'] }
             new:

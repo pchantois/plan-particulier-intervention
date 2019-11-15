@@ -20,10 +20,12 @@ class MenuRepository extends ServiceEntityRepository {
 	// /**
 	//  * @return Menu[] Returns an array of Menu objects
 	//  */
-	public function findMainMenu() {
+	public function findMainMenu($reference) {
 		return $this->createQueryBuilder('m')
 			->andWhere('m.categorie = :categorie')
 			->setParameter('categorie', 'main')
+			->andWhere('m.ref = :reference')
+			->setParameter('reference', $reference)
 			->orderBy('m.rang', 'ASC')
 			->getQuery()
 			->getResult()
