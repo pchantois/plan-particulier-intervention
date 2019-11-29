@@ -3,16 +3,16 @@
 {% block title %}Operation index{% endblock %}
 
 {% block body %}
-    <h1>Operation index</h1>
-
-    <table class="table">
+<article id="ppi">
+    <h2>PPI</h2>
+    <table class="table-wrapper">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Code</th>
                 <th>Libelle</th>
-                <th>Description</th>
-                <th>Commentaire</th>
+                <!-- <th>Description</th>
+                <th>Commentaire</th> -->
             </tr>
         </thead>
         <tbody>
@@ -21,16 +21,18 @@
                 <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.id }}</a></td>
                 <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.code }}</a></td>
                 <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a></td>
-                <td>{{ operation.description }}</td>
-                <td>{{ operation.commentaire }}</td>
+                <!-- <td>{{ operation.description }}</td>
+                <td>{{ operation.commentaire }}</td> -->
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include "admin/operation/ppi_global.html.twig" with {'items': ppi} %}
+</article>
+
+    {#% include "admin/operation/ppi_global.html.twig" with {'items': ppi} %#}
     {# include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi2} #}
 {% endblock %}

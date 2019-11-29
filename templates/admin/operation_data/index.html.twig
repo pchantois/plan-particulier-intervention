@@ -1,11 +1,11 @@
 {% extends 'base_' ~ ga_theme ~ '.html.twig' %}
 
-{% block title %}OperationData index{% endblock %}
+{% block title %}Operations - Data{% endblock %}
 
 {% block body %}
-    <h1>OperationData index</h1>
-
-    <table class="table">
+<article id="ppi">
+    <h2>PPI</h2>
+    <table class="table-wrapper">
         <thead>
             <tr>
                 <th>Id</th>
@@ -18,10 +18,10 @@
         <tbody>
         {% for operation_datum in operation_datas %}
             <tr>
-                <td>{{ operation_datum.id }}</td>
+                <td>{{ operation_datum.operation.code }}</td>
                 <td>{{ operation_datum.montant }}</td>
                 <td>{{ operation_datum.annee }}</td>
-                <td>{{ operation_datum.type ? 'Yes' : 'No' }}</td>
+                <td>{{ operation_datum.type ? 'Dépense' : 'Recette' }}</td>
                 <td>
                     <a href="{{ path('admin_operation_data_show', {'id': operation_datum.id}) }}">show</a>
                     <a href="{{ path('admin_operation_data_edit', {'id': operation_datum.id}) }}">edit</a>
@@ -34,6 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_operation_data_new') }}">Create new</a>
+</article>
 {% endblock %}
