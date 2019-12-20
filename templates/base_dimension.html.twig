@@ -10,7 +10,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         
-        {% block stylesheets %}
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 			<link rel="stylesheet" href="{{ asset('themes/dimension/assets/css/main.css')}}" />
             <link rel="stylesheet" href="{{ asset('assets/css/site.css')}}" />
             <link rel="stylesheet" href="{{ asset('themes/base/css/site.css')}}" />
@@ -53,12 +54,16 @@
         <div id="bg"></div>
 
         {% block javascripts %}
-        <!-- Scripts -->
-            <script src="{{asset('themes/dimension/assets/js/jquery.min.js')}}"></script>
+		<!-- Scripts -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
             <script src="{{asset('themes/dimension/assets/js/browser.min.js')}}"></script>
             <script src="{{asset('themes/dimension/assets/js/breakpoints.min.js')}}"></script>
             <script src="{{asset('themes/dimension/assets/js/util.js')}}"></script>
             <script src="{{asset('themes/dimension/assets/js/main.js')}}"></script>
+			<script src="{{asset('assets/js/table-scroll.js')}}"></script>
+			<script src="{{asset('assets/js/table-scroll.min.js')}}"></script>
+			<script src="{{asset('assets/js/table-scroll-config.min.js')}}"></script>
         {% endblock %}
 	</body>
 </html>

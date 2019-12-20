@@ -20,8 +20,10 @@ class OperationDataController extends AbstractController
      */
     public function index(OperationDataRepository $operationDataRepository): Response
     {
+        $operations = $operationDataRepository->findAll();
         return $this->render('admin/operation_data/index.html.twig', [
-            'operation_datas' => $operationDataRepository->findAll(),
+            'operation_datas' => $operations,
+            'ppi' => $this->ppi($operations),
         ]);
     }
 
@@ -92,5 +94,78 @@ class OperationDataController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_operation_data_index');
+    }
+
+    protected function ppi(Array $operations, String $category = 'global')
+    {
+        $libelleAnnee = array();
+        $ppi = array();
+
+        // construction du tableau des PPI
+        foreach($operations as $operation)
+        {
+            //$libelle = $operation->getId() .'####'. $operation->getLibelle();
+            $libelle = $operation->getOperation()->getLibelle();
+            $annee = $operation->getAnnee();
+            $compte = ($operation->getType() ? 'depense' : 'recette' );
+
+            switch(strtolower($category))
+            {
+                case 'parcategorie':
+                    if (! isset($ppi[$compte][$annee]))
+                    {
+                        $ppi['depense'][$annee] = $ppi['recette'][$annee] = 0;
+                    }
+                    $ppi[$compte][$annee] += $operation->getMontant();
+        
+                    $libelleAnnee[] = $annee;
+                    break;
+                default:
+                    if (! isset($ppi[$libelle][$annee][$compte]))
+                    {
+                        $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
+                    }
+                    $ppi[$libelle][$annee][$compte] += $operation->getMontant();
+        
+                    $libelleAnnee[] = $annee;
+            }
+        }
+        
+        $libelleAnnee = array_unique($libelleAnnee);
+
+        foreach($ppi as $key => $value)
+        {
+            foreach($libelleAnnee as $item)
+            {
+                switch(strtolower($category))
+                {
+                    case 'parcategory':
+                        if (! isset($ppi[$key][$item]))
+                        {
+                            $ppi[$key][$item] = 0;
+                        }
+                        break;
+                    default:
+                        if (! isset($ppi[$key][$item]))
+                        {
+                            $ppi[$key][$item]['depense'] = 0;
+                            $ppi[$key][$item]['recette'] = 0;
+                        }
+                }
+            }
+            ksort($ppi[$key]);
+        }
+
+		$configs = array(
+			'site' => [
+				'theme' => 'dimension',
+			],
+        );
+
+        return $ppi;
+        // return $this->render('admin/operation/ppi.html.twig', [
+        //     'items' => $ppi,
+		// 	//'configs' => $configs,
+        // ]);
     }
 }
