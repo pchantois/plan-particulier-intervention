@@ -1,16 +1,20 @@
 <table class="ppi">
     <thead>
         <tr>
-            <th rowspan="2">libelle</th>
+            <td rowspan="3">libelle</td>
+            <td colspan="3" data-scroll-span="{{ (items|first|keys|last - items|first|keys|first +1)*3 }}">Data</td>
+            <td rowspan="3"></td>
+        </tr>
+        <tr>
             {% for annee in items|first|keys %}
-            <th colspan="3">{{annee}}</th>
+            <td colspan="3">{{annee}}</td>
             {% endfor %}
         </tr>
         <tr>
             {% for annee in items|first|keys %}
-            <th>depense</th>
-            <th>recette</th>
-            <th>charge nette</th>
+            <td>depense</th>
+            <td>recette</td>
+            <td>charge nette</td>
             {% endfor %}
         </tr>
     </thead>
@@ -19,9 +23,9 @@
         <tr>
             <td><a href="">{{ libelle }}</a></td>
             {% for operation in item %}
-            <td>{# operation.depense #}</td>
-            <td>{# operation.recette #}</td>
-            <td>{# operation.depense - operation.recette #}</td>
+            <td>{{operation.depense}}</td>
+            <td>{{operation.recette}}</td>
+            <td>{{operation.depense - operation.recette}}</td>
             {% endfor %}
         </tr>
     {% else %}
@@ -30,4 +34,11 @@
         </tr>
     {% endfor %}
     </tbody>
+    <tfoot>
+        <tr>
+            <td rowspan="1"></td>
+            <td rowspan="3" class="sg-x-scroll-cell"></td>
+            <td rowspan="1"></td>
+        </tr>
+    </tfoot>
 </table>
