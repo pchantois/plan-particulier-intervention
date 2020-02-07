@@ -38,17 +38,17 @@ class PolitiquePub
         return $this->id;
     }
 
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
+    // public function getCode(): ?string
+    // {
+    //     return $this->code;
+    // }
 
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
+    // public function setCode(string $code): self
+    // {
+    //     $this->code = $code;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getLibelle(): ?string
     {

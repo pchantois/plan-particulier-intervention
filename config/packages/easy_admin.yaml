@@ -91,8 +91,8 @@ easy_admin:
                 title: "Ajout d'un nouveau PolitiquePub"
                 form_options: { validation_groups: ['Default'] }
                 fields:
+                    - { property: 'id'}
                     - { property: 'libelle'}
-                    - { property: 'code'}
         RegroupementOpe:
             show:
                 max_results: 5

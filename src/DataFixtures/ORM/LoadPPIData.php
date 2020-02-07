@@ -121,6 +121,11 @@ class LoadPPIData extends Fixture
             $operation = new Operation();
             $operation->setCode($data[8]);
             $operation->setLibelle($data[9]);
+            $operation->setRegroupementOpe($manager->getRepository(RegroupementOpe::class)->findOneBy(['libelle' => $data[10]]));
+            $operation->setNatureOpe($manager->getRepository(NatureOpe::class)->findOneBy(['libelle' => $data[11]]));
+            $operation->setQuartier($manager->getRepository(Quartier::class)->findOneBy(['libelle' => $data[12]]));
+            $operation->setPolitiquePub($manager->getRepository(PolitiquePub::class)->findOneBy(['libelle' => $data[13]]));
+            $operation->setCodeMaire($manager->getRepository(CodeMaire::class)->findOneBy(['libelle' => $data[14]]));
             $operation->setDescription($data[51]);
             $operation->setCommentaire($data[52]);
             $operation->setDob(true);
