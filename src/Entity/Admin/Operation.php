@@ -148,14 +148,14 @@ class Operation
         return $this;
     }
 
-    public function getRelation(): ?Quartier
+    public function getQuartier(): ?Quartier
     {
-        return $this->relation;
+        return $this->quartier;
     }
 
-    public function setRelation(?Quartier $relation): self
+    public function setQuartier(?Quartier $quartier): self
     {
-        $this->relation = $relation;
+        $this->quartier = $quartier;
 
         return $this;
     }
@@ -174,24 +174,24 @@ class Operation
 
     public function getNatureOpe(): ?NatureOpe
     {
-        return $this->NatureOpe;
+        return $this->natureOpe;
     }
 
     public function setNatureOpe(?NatureOpe $NatureOpe): self
     {
-        $this->NatureOpe = $NatureOpe;
+        $this->natureOpe = $NatureOpe;
 
         return $this;
     }
 
     public function getPolitiquePub(): ?PolitiquePub
     {
-        return $this->PolitiquePub;
+        return $this->politiquePub;
     }
 
     public function setPolitiquePub(?PolitiquePub $PolitiquePub): self
     {
-        $this->PolitiquePub = $PolitiquePub;
+        $this->politiquePub = $PolitiquePub;
 
         return $this;
     }

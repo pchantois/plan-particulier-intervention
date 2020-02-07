@@ -89,4 +89,8 @@ class OperationData
 
         return $this;
     }
+
+	public function __toString() {
+		return $this->getOperation()->getLibelle();
+	}
 }

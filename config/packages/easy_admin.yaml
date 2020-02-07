@@ -121,16 +121,17 @@ easy_admin:
                     - {property: 'libelle'}
                     - {property: 'description'}
                     - {property: 'commentaire'}
-                    - {property: 'annee'}
-                    - {property: 'type'}
-                    - {property: 'montant'}
+                    # - {property: 'annee'}
+                    # - {property: 'type'}
+                    # - {property: 'montant'}
                     #- {type: 'group', label: 'Présentation'}
                     #- {property: 'presentation', type: 'fos_ckeditor'}
-                    #- {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
-                    #- {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
-                    #- {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
-                    #- {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
-                    #- {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
+                    #- {property: 'OperationData', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\OperationData' }}
+                    - {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
+                    - {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\Quartier' }}
+                    - {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
+                    - {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
+                    - {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
             new:
                 help: 'Opération : ajout'
                 form_options: { validation_groups: ['Default', 'Event'] }
