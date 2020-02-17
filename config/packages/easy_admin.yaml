@@ -23,7 +23,7 @@ easy_admin:
     list:
         actions:
             - {name: 'edit', icon: 'pencil', label: false, title: 'Edit'}
-            - {name: 'delete', icon: 'remove', label: false, title: 'Delete'}
+            - {name: '-delete', icon: 'remove', label: false, title: 'Delete'}
     formats:
         date:     'd/m/Y'
         time:     'H:i'

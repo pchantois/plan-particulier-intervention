@@ -6,7 +6,7 @@
 parameters:
     locale: 'fr'
     mailer_user: 'pascalchantois@gmail.com'
-    ga_theme: 'dimension'
+    ga_theme: 'autres'
 
 services:
     # default configuration for services in *this* file
