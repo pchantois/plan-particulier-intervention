@@ -16,6 +16,12 @@ class OperationDataType extends AbstractType
             ->add('annee')
             ->add('type')
             ->add('operation')
+            ->add('OperationData', CollectionType::class, [
+                'entry_type' => OperationDataForm::class,
+                'allow_delete' => true,
+                'allow_add' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

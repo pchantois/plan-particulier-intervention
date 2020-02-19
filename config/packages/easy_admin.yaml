@@ -9,17 +9,35 @@ easy_admin:
             js:
             favicon: '/assets/backend/favicon.png'
         menu:
-            - {label: 'Site'}
-            - {label: 'Objets'}
-            - {entity: 'Operation', params: {}}
-            - {entity: 'RegroupementOpe', params: {}}
-            - {entity: 'Quartier', params: {}}
-            - {entity: 'CodeMaire', params: {}}
-            - {entity: 'NatureOpe', params: {}}
-            - {entity: 'PolitiquePub', params: {}}
-            - {entity: 'Menu', params: {}}
-            - {label: 'Utilisateurs'}
-            - {entity: 'User', icon: 'user', params: {}}
+            - label: 'Operations'
+              children:
+                    -
+                        entity: 'Operation'
+                        label: 'Fiche'
+                    -
+                        entity: 'OperationData'
+                        label: 'Financement'
+            - label: 'Structure'
+              children:
+                    -
+                        entity: 'RegroupementOpe'
+                    -
+                        entity: 'Quartier'
+                    -
+                        entity: 'CodeMaire'
+                    -
+                        entity: 'NatureOpe'
+                    -
+                        entity: 'PolitiquePub'
+            - label: 'Menus'
+              children:
+                    -
+                        entity: 'Menu'
+            - label: 'Utilisateurs'
+              children:
+                    -
+                        entity: 'User'
+                        icon: 'user'
     list:
         actions:
             - {name: 'edit', icon: 'pencil', label: false, title: 'Edit'}
@@ -108,38 +126,66 @@ easy_admin:
                     #- {property: 'evenements', type: 'easyadmin_autocomplete'}
         Operation:
             class: App\Entity\Admin\Operation
-            label: 'Les Opérations'
+            label: 'Les fiches'
             list:
-                title: "Liste des Opérations"
+                title: "Liste des fiches"
             form:
-                title: 'Ajout Opération'
+                title: 'Ajout fiche'
                 form_options: { validation_groups: ['Default'] }
                 fields:
-                    - {type: 'group', columns: 2, label: 'Information de base'}
+                    - {type: 'tab', columns: 2, label: 'Information de base'}
                     - id
                     - {property: 'code'}
                     - {property: 'libelle'}
                     - {property: 'description'}
                     - {property: 'commentaire'}
-                    # - {property: 'annee'}
-                    # - {property: 'type'}
-                    # - {property: 'montant'}
-                    #- {type: 'group', label: 'Présentation'}
-                    #- {property: 'presentation', type: 'fos_ckeditor'}
-                    #- {property: 'OperationData', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\OperationData' }}
+                    - {type: 'tab', columns: 2, label: 'Structure'}
                     - {property: 'RegroupementOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\RegroupementOpe' }}
                     - {property: 'Quartier', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\Quartier' }}
                     - {property: 'CodeMaire', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\CodeMaire' }}
                     - {property: 'NatureOpe', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\NatureOpe' }}
                     - {property: 'PolitiquePub', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\PolitiquePub' }}
+                    - {type: 'tab', columns: 2, label: 'Financements'}
+                    # - 
+                    #     property: 'OperationData'
+                    #     icon: 'customer'
+                    #     type: 'easyadmin_autocomplete'
+                    #     type_options:
+                    #         class: 'App\Entity\Admin\OperationData'
             new:
-                help: 'Opération : ajout'
+                help: 'Fiche : ajout'
+                form_options: { validation_groups: ['Default', 'Event'] }
+                fields:
+                    - '-id'
+                    - '-tab'
+            edit:
+                help: 'Fiche : modification'
+                title: 'Edit fiche'
+                fields:
+                    - '-id'
+        OperationData:
+            class: 'App\Entity\Admin\OperationData'
+            label: 'Les financements'
+            list:
+                title: "Liste des financements"
+            form:
+                title: 'Ajout financements'
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - {type: 'group', columns: 2, label: 'Information de base'}
+                    - id
+                    - {property: 'Operation', icon: 'customer', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Admin\Operation' }}
+                    - {property: 'annee'}
+                    - {property: 'montant'}
+                    - {property: 'type'}
+            new:
+                help: 'financement : ajout'
                 form_options: { validation_groups: ['Default', 'Event'] }
                 fields:
                     - '-id'
             edit:
-                help: 'Opération : modification'
-                title: 'Edit Opération'
+                help: 'financements : modification'
+                title: 'Edit financements'
                 fields:
                     - '-id'
         #Notification:

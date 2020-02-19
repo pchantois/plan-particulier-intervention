@@ -92,5 +92,6 @@ class OperationData
 
 	public function __toString() {
 		return $this->getOperation()->getLibelle();
+		// return $this->getMontant().' - '.$this->getType().' - '.$this->getAnnee();
 	}
 }
