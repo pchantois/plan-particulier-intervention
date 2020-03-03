@@ -53,7 +53,7 @@ class LoadPPIData extends Fixture
 		//var_dump($datas);
 
         $reader->close();
-        var_dump($datas);
+        //var_dump($datas);
         foreach ($datas['quartier'] as $data) {
             $item = new Quartier();
             $item->setCode($data[0]);

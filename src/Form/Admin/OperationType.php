@@ -16,9 +16,6 @@ class OperationType extends AbstractType
             ->add('libelle')
             ->add('description')
             ->add('commentaire')
-            ->add('montant')
-            ->add('annee')
-            ->add('type')
             ->add('regroupementOpe')
         ;
     }

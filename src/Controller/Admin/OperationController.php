@@ -116,34 +116,37 @@ class OperationController extends AbstractController
     {
         $libelleAnnee = array();
         $ppi = array();
-/*
+
         // construction du tableau des PPI
         foreach($operations as $operation)
         {
             //$libelle = $operation->getId() .'####'. $operation->getLibelle();
-            $libelle = $operation->getLibelle();
-            $annee = $operation->getAnnee();
-            $compte = ($operation->getType() ? 'depense' : 'recette' );
-
-            switch(strtolower($category))
-            {
-                case 'parcategorie':
-                    if (! isset($ppi[$compte][$annee]))
-                    {
-                        $ppi['depense'][$annee] = $ppi['recette'][$annee] = 0;
-                    }
-                    $ppi[$compte][$annee] += $operation->getMontant();
-        
-                    $libelleAnnee[] = $annee;
-                    break;
-                default:
-                    if (! isset($ppi[$libelle][$annee][$compte]))
-                    {
-                        $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
-                    }
-                    $ppi[$libelle][$annee][$compte] += $operation->getMontant();
-        
-                    $libelleAnnee[] = $annee;
+            $datas = $operation->getOperationData();
+            foreach($datas as $item) {
+                $libelle = $operation->getLibelle().'####'.$operation->getId();
+                $annee = $item->getAnnee();
+                $compte = ($item->getType() ? 'depense' : 'recette' );
+    
+                switch(strtolower($category))
+                {
+                    case 'parcategorie':
+                        if (! isset($ppi[$compte][$annee]))
+                        {
+                            $ppi['depense'][$annee] = $ppi['recette'][$annee] = 0;
+                        }
+                        $ppi[$compte][$annee] += $item->getMontant();
+            
+                        $libelleAnnee[] = $annee;
+                        break;
+                    default:
+                        if (! isset($ppi[$libelle][$annee][$compte]))
+                        {
+                            $ppi[$libelle][$annee]['depense'] = $ppi[$libelle][$annee]['recette'] = 0;
+                        }
+                        $ppi[$libelle][$annee][$compte] += $item->getMontant();
+            
+                        $libelleAnnee[] = $annee;
+                }
             }
         }
         
@@ -170,7 +173,7 @@ class OperationController extends AbstractController
                 }
             }
             ksort($ppi[$key]);
-        }*/
+        }
 /*
 		$configs = array(
 			'site' => [

@@ -156,16 +156,6 @@ class OperationDataController extends AbstractController
             ksort($ppi[$key]);
         }
 
-		$configs = array(
-			'site' => [
-				'theme' => 'dimension',
-			],
-        );
-
         return $ppi;
-        // return $this->render('admin/operation/ppi.html.twig', [
-        //     'items' => $ppi,
-		// 	//'configs' => $configs,
-        // ]);
     }
 }
