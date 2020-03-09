@@ -106,9 +106,14 @@ class LoadPPIData extends Fixture
                 continue;
             }
 			$datas[$feuille] = array();
-			//$this->qf_generate($feuille, $sheet);
+            //$this->qf_generate($feuille, $sheet);
+            $first = true;
 			foreach ($sheet->getRowIterator() as $row) {
-				// do stuff with the row
+                // do stuff with the row
+                if ($first) {
+                    $first = false;
+                    continue;
+                }
 				$datas[$feuille][] = $row->getCells();
 				//$datas[] = $row;
 			}

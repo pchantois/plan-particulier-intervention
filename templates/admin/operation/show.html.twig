@@ -3,22 +3,26 @@
 {% block title %}Operation{% endblock %}
 
 {% block body %}
-    <article class="operation" id="operation">
-        <header>{{ operation.libelle }}</header>
-        <p id="reference">Département XXX - Direction XXX</p>
-        <section class="description">
-            <header>description de l’opération d’investissement</header>
-            <p>{{ operation.description }}</p>
-        </section>
-        <section class="estimation">
-            <header>estimation du coût de l’opération</header>
-            {# <p>{% include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi} %}</p> #}
-        </section>
-        <section class="notifications">
-            <header>remarques</header>
-            <p>{{ operation.commentaire }}</p>
-        </section>
-    </article>
+    <section id="data">
+        <article class="operation" id="operation">
+            <header>{{ operation.libelle }}</header>
+            <p id="reference">Département XXX - Direction XXX</p>
+            <section class="description">
+                <header>description de l’opération d’investissement</header>
+                <p>{{ operation.description }}</p>
+            </section>
+            <section class="estimation">
+                <header>estimation du coût de l’opération</header>
+                {# <p>{% include "admin/operation/ppi_parCategorie.html.twig" with {'items': ppi} %}</p> #}
+            </section>
+            <section class="notifications">
+                <header>remarques</header>
+                <p>{{ operation.commentaire }}</p>
+            </section>
+        </article>
+    </section>
+    <section id="formOperationData">formOperationData</section>
+    <section id="dataOperationData">dataOperationData</section>
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
 {% endblock %}
