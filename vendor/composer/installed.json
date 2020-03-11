@@ -2638,27 +2638,27 @@
     },
     {
         "name": "psr/log",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/log.git",
-            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2018-11-20T15:27:04+00:00",
+        "time": "2019-11-01T11:05:21+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.1.x-dev"
             }
         },
         "installation-source": "dist",
@@ -3200,17 +3200,17 @@
     },
     {
         "name": "symfony/contracts",
-        "version": "v1.1.5",
-        "version_normalized": "1.1.5.0",
+        "version": "v1.1.8",
+        "version_normalized": "1.1.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/contracts.git",
-            "reference": "3f3f796d5f24a098a9da62828b8daa1b11494c1b"
+            "reference": "f51bca9de06b7a25b19a4155da7bebad099a5def"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/contracts/zipball/3f3f796d5f24a098a9da62828b8daa1b11494c1b",
-            "reference": "3f3f796d5f24a098a9da62828b8daa1b11494c1b",
+            "url": "https://api.github.com/repos/symfony/contracts/zipball/f51bca9de06b7a25b19a4155da7bebad099a5def",
+            "reference": "f51bca9de06b7a25b19a4155da7bebad099a5def",
             "shasum": ""
         },
         "require": {
@@ -3236,7 +3236,7 @@
             "symfony/service-implementation": "",
             "symfony/translation-implementation": ""
         },
-        "time": "2019-06-20T06:46:26+00:00",
+        "time": "2019-11-07T12:44:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4998,17 +4998,17 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.11.0",
-        "version_normalized": "1.11.0.0",
+        "version": "v1.14.0",
+        "version_normalized": "1.14.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
+            "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
-            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/34094cfa9abe1f0f14f48f490772db7a775559f2",
+            "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2",
             "shasum": ""
         },
         "require": {
@@ -5017,11 +5017,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2019-02-06T07:57:58+00:00",
+        "time": "2020-01-13T11:15:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.11-dev"
+                "dev-master": "1.14-dev"
             }
         },
         "installation-source": "dist",
@@ -7018,60 +7018,5 @@
             "zf2"
         ],
         "abandoned": "laminas/laminas-eventmanager"
-    },
-    {
-        "name": "symfony/webpack-encore-bundle",
-        "version": "v1.7.3",
-        "version_normalized": "1.7.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/webpack-encore-bundle.git",
-            "reference": "5c0f659eceae87271cce54bbdfb05ed8ec9007bd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/5c0f659eceae87271cce54bbdfb05ed8ec9007bd",
-            "reference": "5c0f659eceae87271cce54bbdfb05ed8ec9007bd",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.1.3",
-            "symfony/asset": "^3.4 || ^4.0 || ^5.0",
-            "symfony/config": "^3.4 || ^4.0 || ^5.0",
-            "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
-            "symfony/http-kernel": "^3.4 || ^4.0 || ^5.0",
-            "symfony/service-contracts": "^1.0 || ^2.0"
-        },
-        "require-dev": {
-            "symfony/framework-bundle": "^3.4 || ^4.0 || ^5.0",
-            "symfony/phpunit-bridge": "^4.3.5 || ^5.0",
-            "symfony/twig-bundle": "^3.4 || ^4.0 || ^5.0",
-            "symfony/web-link": "^3.4 || ^4.0 || ^5.0"
-        },
-        "time": "2020-01-31T15:31:59+00:00",
-        "type": "symfony-bundle",
-        "extra": {
-            "thanks": {
-                "name": "symfony/webpack-encore",
-                "url": "https://github.com/symfony/webpack-encore"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\WebpackEncoreBundle\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Integration with your Symfony app & Webpack Encore!"
     }
 ]
