@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Admin\Operation;
 use App\Form\Admin\OperationType;
+use App\Entity\Admin\OperationData;
+use App\Form\Admin\OperationDataType;
 use App\Repository\Admin\OperationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,6 +66,9 @@ class OperationController extends AbstractController
      */
     public function show(Operation $operation): Response
     {
+        $operationDatum = new OperationData();
+        $form = $this->createForm(OperationDataType::class, $operationDatum);
+
 		$configs = array(
 			'site' => [
                 'theme' => 'dimension',
@@ -73,6 +78,7 @@ class OperationController extends AbstractController
             'operation' => $operation,
             //'ppi'  => $this->ppi([$operation],'parCategorie'),
 			'configs' => $configs,
+            'form' => $form->createView(),
         ]);
     }
 

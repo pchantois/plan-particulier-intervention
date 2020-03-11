@@ -21,8 +21,8 @@
             </section>
         </article>
     </section>
-    <section id="formOperationData">formOperationData</section>
-    <section id="dataOperationData">dataOperationData</section>
+    <section id="formOperationData">{% include 'admin/operation_data/_form.html.twig' %}</section>
+    <section id="dataOperationData">{% include "admin/operation_data/block.html.twig" with {items: operation.operationData} %}</section>
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
 {% endblock %}
