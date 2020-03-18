@@ -42,7 +42,6 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         ),
         'S' => 
         array (
-            'Symfony\\WebpackEncoreBundle\\' => 28,
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
@@ -191,10 +190,6 @@ class ComposerStaticInit7893371254019c1cf4a1b070e293ffa4
         'Toiba\\FullCalendarBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/toiba/fullcalendar-bundle',
-        ),
-        'Symfony\\WebpackEncoreBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src',
         ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (
