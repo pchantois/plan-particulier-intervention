@@ -5,6 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Admin\OperationData;
 use App\Form\Admin\OperationDataType;
 use App\Repository\Admin\OperationDataRepository;
+use App\Entity\Admin\Operation;
+use App\Form\Admin\OperationType;
+use App\Repository\Admin\OperationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +27,30 @@ class OperationDataController extends AbstractController
         return $this->render('admin/operation_data/index.html.twig', [
             'operation_datas' => $operations,
             'ppi' => $this->ppi($operations),
+        ]);
+    }
+
+    /**
+     * @Route("/updateOperation/{id}", name="admin_operation_data_with_updateOperation", methods={"GET","POST"})
+     */
+    public function updateOperation(Request $request, Operation $operation): Response
+    {
+        $operationDatum = new OperationData();
+        $operationDatum->setOperation($operation);
+        $form = $this->createForm(OperationDataType::class, $operationDatum);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($operationDatum);
+            $entityManager->flush();
+
+            //return $this->redirectToRoute('admin_operation_data_index');
+        }
+
+        return $this->render('admin/operation_data/new.html.twig', [
+            'operation_datum' => $operationDatum,
+            'form' => $form->createView(),
         ]);
     }
 

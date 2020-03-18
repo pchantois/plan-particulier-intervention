@@ -18,9 +18,9 @@
         <tbody>
         {% for operation in operations %}
             <tr>
-                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.id }}</a></td>
-                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.code }}</a></td>
-                <td><a href="{{ path('admin_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a></td>
+                <td><a href="{{ path('admin_operation_data_with_updateOperation', {'id': operation.id}) }}">{{ operation.id }}</a></td>
+                <td><a href="{{ path('admin_operation_data_with_updateOperation', {'id': operation.id}) }}">{{ operation.code }}</a></td>
+                <td><a href="{{ path('admin_operation_data_with_updateOperation', {'id': operation.id}) }}">{{ operation.libelle }}</a></td>
                 <!-- <td>{{ operation.description }}</td>
                 <td>{{ operation.commentaire }}</td> -->
             </tr>
