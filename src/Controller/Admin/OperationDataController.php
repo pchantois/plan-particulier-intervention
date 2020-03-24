@@ -51,6 +51,9 @@ class OperationDataController extends AbstractController
         return $this->render('admin/operation_data/new.html.twig', [
             'operation_datum' => $operationDatum,
             'form' => $form->createView(),
+            'config' => [
+                'listButtonLibelle' => 'Afficher la liste des investissements',
+            ],
         ]);
     }
 

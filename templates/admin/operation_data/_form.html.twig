@@ -1,5 +1,20 @@
 {{ form_start(form) }}
-    {{ form_row(form.operation, {'attr': {'disabled': 'disabled'}}) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    
+    {{ form_label(form.montant) }}
+    {{ form_widget(form.montant) }}
+    {{ form_errors(form.montant) }}
+    
+    {{ form_label(form.annee) }}
+    {{ form_widget(form.annee) }}
+    {{ form_errors(form.annee) }}
+    
+    {{ form_label(form.type) }}
+    {{ form_widget(form.type) }}
+    {{ form_errors(form.type) }}
+    
+    {{ form_row(form.operation, {'attr': {'style': 'display:none;'}}) }}
+
+    
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
