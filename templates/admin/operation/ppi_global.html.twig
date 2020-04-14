@@ -24,9 +24,9 @@
         <tr>
             <td><a href="{{ path('admin_operation_show', {'id': libelle|split('####').1}) }}">{{ libelle|split('####').0 }}</a></td>
             {% for operation in item %}
-            <td>{{operation.depense}}</td>
-            <td>{{operation.recette}}</td>
-            <td>{{operation.depense - operation.recette}}</td>
+            <td>{{operation.depense|number_format(0, '', '&nbsp;')|raw}}</td>
+            <td>{{operation.recette|number_format(0, '', '&nbsp;')|raw}}</td>
+            <td>{{(operation.depense - operation.recette)|number_format(0, '', '&nbsp;')|raw}}</td>
             {% endfor %}
         </tr>
     {% else %}
