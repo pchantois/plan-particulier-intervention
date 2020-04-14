@@ -19,6 +19,12 @@ use Vich\UploaderBundle\Storage\StorageInterface;
  */
 class VichImageType extends VichFileType
 {
+    public const STORAGE_RESOLVE_URI = 0;
+
+    public const STORAGE_RESOLVE_PATH_ABSOLUTE = 1;
+
+    public const STORAGE_RESOLVE_PATH_RELATIVE = 2;
+
     /**
      * @var CacheManager|null
      */
@@ -42,11 +48,21 @@ class VichImageType extends VichFileType
         $resolver->setDefaults([
             'image_uri' => true,
             'imagine_pattern' => null,
+            'storage_resolve_method' => static::STORAGE_RESOLVE_URI,
         ]);
+
+        $resolver->setAllowedValues(
+            'storage_resolve_method',
+            [
+                static::STORAGE_RESOLVE_URI,
+                static::STORAGE_RESOLVE_PATH_RELATIVE,
+                static::STORAGE_RESOLVE_PATH_ABSOLUTE,
+            ]
+        );
 
         $resolver->setAllowedTypes('image_uri', ['bool', 'string', 'callable']);
 
-        $imageUriNormalizer = function (Options $options, $imageUri) {
+        $imageUriNormalizer = static function (Options $options, $imageUri) {
             return $imageUri ?? $options['download_uri'];
         };
 
@@ -65,8 +81,7 @@ class VichImageType extends VichFileType
                 if (null === $this->cacheManager) {
                     throw new \RuntimeException('LiipImagineBundle must be installed and configured for using "imagine_pattern" option.');
                 }
-
-                $path = $this->storage->resolvePath($object, $form->getName(), null, true);
+                $path = $this->resolvePath($options['storage_resolve_method'], $object, $form);
                 if (null !== $path) {
                     $view->vars['image_uri'] = $this->cacheManager->getBrowserPath($path, $options['imagine_pattern']);
                 }
@@ -84,10 +99,26 @@ class VichImageType extends VichFileType
         // required for BC
         // TODO: remove for 2.0
         $view->vars['show_download_link'] = !empty($view->vars['download_uri']);
+        $view->vars['asset_helper'] = $options['asset_helper'];
     }
 
     public function getBlockPrefix(): string
     {
         return 'vich_image';
+    }
+
+    private function resolvePath(int $storageResolveMethod, object $object, FormInterface $form): ?string
+    {
+        if (static::STORAGE_RESOLVE_URI === $storageResolveMethod) {
+            return $this->storage->resolveUri($object, $form->getName());
+        }
+        if (static::STORAGE_RESOLVE_PATH_ABSOLUTE === $storageResolveMethod) {
+            return $this->storage->resolvePath($object, $form->getName());
+        }
+        if (static::STORAGE_RESOLVE_PATH_RELATIVE === $storageResolveMethod) {
+            return $this->storage->resolvePath($object, $form->getName(), null, true);
+        }
+
+        return null;
     }
 }

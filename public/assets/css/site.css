@@ -50,10 +50,6 @@
 .hDate{
 	font-weight:bold;
 }
-.articleLeft{
-}
-.articleRight{
-}
 
 .main_content, .main_content section {
 	float: left;
@@ -138,3 +134,53 @@ Fin - Gestion des événements
  /*
  Fin - Modélisation d'opération
  */
+
+ /*
+Operation - form
+*/
+
+form > div {
+	margin-bottom: 15px;
+}
+
+.form_label {
+	float: left;
+	width: 90px;
+}
+
+.btn {
+	margin-bottom: 20px;
+}
+
+
+section#data {
+	float: left;
+	margin-right: 30px;
+}
+
+.ppi > thead > tr:first-child > td:first-child {
+	min-width: 350px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+
+form > #operation {
+	width: 70%;
+}
+
+form > #operation > div {
+	margin-bottom: 20px;
+}
+
+form > #operation > div > label {
+	position: fixed;
+	padding: 5px;
+}
+
+form > #operation > div > input, form > #operation > div > textarea, form > #operation > div > select {
+	box-sizing: border-box;
+	width: 50%;
+	padding: 5px;
+	padding-left: 150px;
+}

@@ -1,18 +1,29 @@
 {{ form_start(form) }}
+    <div>
+        <div class='form_label'>{{ form_label(form.montant) }}</div>
+        <div class="form_widget">{{ form_widget(form.montant) }}</div>
+        <div class="form_errors">{{ form_errors(form.montant) }}</div>
+    </div>
     
-    {{ form_label(form.montant) }}
-    {{ form_widget(form.montant) }}
-    {{ form_errors(form.montant) }}
+    <div>
+        <div class='form_label'>{{ form_label(form.annee) }}</div>
+        <div class="form_widget">{{ form_widget(form.annee) }}</div>
+        <div class="form_errors">{{ form_errors(form.annee) }}</div>
+    </div>
     
-    {{ form_label(form.annee) }}
-    {{ form_widget(form.annee) }}
-    {{ form_errors(form.annee) }}
+    <div>
+        <div class='form_label'>{{ form_label(form.type) }}</div>
+        <div class="form_widget">{{ form_widget(form.type) }}</div>
+        <div class="form_errors">{{ form_errors(form.type) }}</div>
+    </div>
     
-    {{ form_label(form.type) }}
-    {{ form_widget(form.type) }}
-    {{ form_errors(form.type) }}
+    <div style="display: none;">
+        {{ form_label(form.operation) }}
+        {{ form_widget(form.operation) }}
+        {{ form_errors(form.operation) }}
+    </div>
     
-    {{ form_row(form.operation, {'attr': {'style': 'display:none;'}}) }}
+    {# {{ form_row(form.operation, {'attr': {'style': 'display:none;'}}) }} #}
 
     
 

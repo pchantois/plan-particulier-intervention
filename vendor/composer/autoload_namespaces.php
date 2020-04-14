@@ -9,5 +9,4 @@ return array(
     'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'ProxyManager\\' => array($vendorDir . '/ocramius/proxy-manager/src'),
-    'Behat\\Transliterator' => array($vendorDir . '/behat/transliterator/src'),
 );

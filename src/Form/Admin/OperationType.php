@@ -14,9 +14,23 @@ class OperationType extends AbstractType
         $builder
             ->add('code')
             ->add('libelle')
-            ->add('description')
-            ->add('commentaire')
+            ->add('description', null, [
+                'attr' => [
+                    'rows' => 7,
+                ]
+            ])
+            ->add('commentaire', null, [
+                'attr' => [
+                    'rows' => 7,
+                ]
+            ])
             ->add('regroupementOpe')
+            ->add('codeMaire')
+            ->add('natureOpe')
+            ->add('politiquePub')
+            ->add('dob')
+            ->add('recueil')
+            ->add('operationData')
         ;
     }
 

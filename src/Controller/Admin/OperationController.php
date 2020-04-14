@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/operation")
+ * @Route("/")
  */
 class OperationController extends AbstractController
 {
@@ -24,17 +24,11 @@ class OperationController extends AbstractController
     {
         $operations = $operationRepository->findAll();
 
-		$configs = array(
-			'site' => [
-                'theme' => 'dimension',
-			],
-		);
-
         return $this->render('admin/operation/index.html.twig', [
             'operations' => $operations,
             'ppi'  => $this->ppi($operations,'global'),
-            'ppi2'  => $this->ppi($operations,'parCategorie'),
-			'configs' => $configs,
+            //'ppi2'  => $this->ppi($operations,'parCategorie'),
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -55,9 +49,13 @@ class OperationController extends AbstractController
             return $this->redirectToRoute('admin_operation_index');
         }
 
+        $configs = $this->configs();
+        $configs['site']['libelle']['currentTitle'] = "Création d'une opération";
+
         return $this->render('admin/operation/new.html.twig', [
             'operation' => $operation,
             'form' => $form->createView(),
+			'configs' => $configs,
         ]);
     }
 
@@ -69,15 +67,10 @@ class OperationController extends AbstractController
         $operationDatum = new OperationData();
         $form = $this->createForm(OperationDataType::class, $operationDatum);
 
-		$configs = array(
-			'site' => [
-                'theme' => 'dimension',
-			],
-		);
         return $this->render('admin/operation/show.html.twig', [
             'operation' => $operation,
             //'ppi'  => $this->ppi([$operation],'parCategorie'),
-			'configs' => $configs,
+			'configs' => $this->configs(),
             'form' => $form->createView(),
         ]);
     }
@@ -101,6 +94,7 @@ class OperationController extends AbstractController
         return $this->render('admin/operation/edit.html.twig', [
             'operation' => $operation,
             'form' => $form->createView(),
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -192,5 +186,17 @@ class OperationController extends AbstractController
             'items' => $ppi,
 			//'configs' => $configs,
         ]);*/
+    }
+
+    private function configs ()
+    {
+		return array(
+			'site' => [
+                'theme' => 'dimension',
+                'libelle' => [
+                    'mainTitle' => "Plan Pluriannuel d'Investissement"
+                ],
+			],
+		);
     }
 }

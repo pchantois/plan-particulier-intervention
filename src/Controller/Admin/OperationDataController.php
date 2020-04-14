@@ -27,6 +27,7 @@ class OperationDataController extends AbstractController
         return $this->render('admin/operation_data/index.html.twig', [
             'operation_datas' => $operations,
             'ppi' => $this->ppi($operations),
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -54,6 +55,7 @@ class OperationDataController extends AbstractController
             'config' => [
                 'listButtonLibelle' => 'Afficher la liste des investissements',
             ],
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -77,6 +79,7 @@ class OperationDataController extends AbstractController
         return $this->render('admin/operation_data/new.html.twig', [
             'operation_datum' => $operationDatum,
             'form' => $form->createView(),
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -87,6 +90,7 @@ class OperationDataController extends AbstractController
     {
         return $this->render('admin/operation_data/show.html.twig', [
             'operation_datum' => $operationDatum,
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -109,6 +113,7 @@ class OperationDataController extends AbstractController
         return $this->render('admin/operation_data/edit.html.twig', [
             'operation_datum' => $operationDatum,
             'form' => $form->createView(),
+			'configs' => $this->configs(),
         ]);
     }
 
@@ -187,5 +192,18 @@ class OperationDataController extends AbstractController
         }
 
         return $ppi;
+    }
+
+    private function configs ()
+    {
+		return array(
+			'site' => [
+                'theme' => 'dimension',
+                'libelle' => [
+                    'mainTitle' => "Plan Pluriannuel d'Investissement"
+                ],
+            ],
+            'listButtonLibelle' => 'Afficher la liste des investissements',
+		);
     }
 }

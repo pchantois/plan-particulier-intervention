@@ -25,30 +25,16 @@ class Cache extends BaseCache
     private $versionParser;
     private $symfonyRequire;
     private $symfonyConstraints;
+    private $downloader;
     private $io;
 
-    public function setSymfonyRequire(string $symfonyRequire, array $versions, IOInterface $io = null)
+    public function setSymfonyRequire(string $symfonyRequire, Downloader $downloader, IOInterface $io = null)
     {
         $this->versionParser = new VersionParser();
         $this->symfonyRequire = $symfonyRequire;
         $this->symfonyConstraints = $this->versionParser->parseConstraints($symfonyRequire);
+        $this->downloader = $downloader;
         $this->io = $io;
-
-        foreach ($versions['splits'] as $name => $vers) {
-            foreach ($vers as $i => $v) {
-                $v = $this->versionParser->normalize($v);
-
-                if (!$this->symfonyConstraints->matches(new Constraint('==', $v))) {
-                    unset($vers[$i]);
-                }
-            }
-
-            if (!$vers || $vers === $versions['splits'][$name]) {
-                unset($versions['splits'][$name]);
-            }
-        }
-
-        $this->versions = $versions;
     }
 
     public function read($file)
@@ -69,7 +55,7 @@ class Cache extends BaseCache
         }
 
         foreach ($data['packages'] as $name => $versions) {
-            if (!isset($this->versions['splits'][$name])) {
+            if (!isset($this->getVersions()['splits'][$name])) {
                 continue;
             }
 
@@ -88,7 +74,7 @@ class Cache extends BaseCache
 
                 if (!$this->symfonyConstraints->matches(new Constraint('==', $normalizedVersion))) {
                     if (null !== $this->io) {
-                        $this->io->writeError(sprintf('<info>Restricting packages listed in "symfony/symfony" to "%s"</info>', $this->symfonyRequire));
+                        $this->io->writeError(sprintf('<info>Restricting packages listed in "symfony/symfony" to "%s"</>', $this->symfonyRequire));
                         $this->io = null;
                     }
                     unset($versions[$version]);
@@ -121,5 +107,41 @@ class Cache extends BaseCache
         }
 
         return $data;
+    }
+
+    private function getVersions(): array
+    {
+        if (null !== $this->versions) {
+            return $this->versions;
+        }
+
+        $versions = $this->downloader->getVersions();
+        $this->downloader = null;
+        $okVersions = [];
+
+        foreach ($versions['splits'] as $name => $vers) {
+            foreach ($vers as $i => $v) {
+                if (!isset($okVersions[$v])) {
+                    $okVersions[$v] = false;
+
+                    for ($j = 0; $j < 60; ++$j) {
+                        if ($this->symfonyConstraints->matches(new Constraint('==', $v.'.'.$j.'.0'))) {
+                            $okVersions[$v] = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!$okVersions[$v]) {
+                    unset($vers[$i]);
+                }
+            }
+
+            if (!$vers || $vers === $versions['splits'][$name]) {
+                unset($versions['splits'][$name]);
+            }
+        }
+
+        return $this->versions = $versions;
     }
 }

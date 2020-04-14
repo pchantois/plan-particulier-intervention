@@ -11,8 +11,11 @@
 
 namespace Symfony\Bridge\PhpUnit;
 
+use PHPUnit\Framework\TestResult;
+use PHPUnit\Util\ErrorHandler;
 use Symfony\Bridge\PhpUnit\DeprecationErrorHandler\Configuration;
 use Symfony\Bridge\PhpUnit\DeprecationErrorHandler\Deprecation;
+use Symfony\Component\ErrorHandler\DebugClassLoader;
 
 /**
  * Catch deprecation notices and print a summary report at the end of the test suite.
@@ -21,11 +24,6 @@ use Symfony\Bridge\PhpUnit\DeprecationErrorHandler\Deprecation;
  */
 class DeprecationErrorHandler
 {
-    /**
-     * @deprecated since Symfony 4.3, use max[self]=0 instead
-     */
-    const MODE_WEAK_VENDORS = 'weak_vendors';
-
     const MODE_DISABLED = 'disabled';
     const MODE_WEAK = 'max[total]=999999&verbose=0';
     const MODE_STRICT = 'max[total]=0';
@@ -48,7 +46,7 @@ class DeprecationErrorHandler
     ];
 
     private static $isRegistered = false;
-    private static $utilPrefix;
+    private static $isAtLeastPhpUnit83;
 
     /**
      * Registers and configures the deprecation handler.
@@ -72,15 +70,13 @@ class DeprecationErrorHandler
             return;
         }
 
-        self::$utilPrefix = class_exists('PHPUnit_Util_ErrorHandler') ? 'PHPUnit_Util_' : 'PHPUnit\Util\\';
-
         $handler = new self();
         $oldErrorHandler = set_error_handler([$handler, 'handleError']);
 
         if (null !== $oldErrorHandler) {
             restore_error_handler();
 
-            if ([self::$utilPrefix.'ErrorHandler', 'handleError'] === $oldErrorHandler) {
+            if ($oldErrorHandler instanceof ErrorHandler || [ErrorHandler::class, 'handleError'] === $oldErrorHandler) {
                 restore_error_handler();
                 self::register($mode);
             }
@@ -95,20 +91,26 @@ class DeprecationErrorHandler
     {
         $deprecations = [];
         $previousErrorHandler = set_error_handler(function ($type, $msg, $file, $line, $context = []) use (&$deprecations, &$previousErrorHandler) {
-            if (E_USER_DEPRECATED !== $type && E_DEPRECATED !== $type) {
+            if (E_USER_DEPRECATED !== $type && E_DEPRECATED !== $type && (E_WARNING !== $type || false === strpos($msg, '" targeting switch is equivalent to "break'))) {
                 if ($previousErrorHandler) {
                     return $previousErrorHandler($type, $msg, $file, $line, $context);
                 }
 
-                static $autoload = true;
-
-                $ErrorHandler = class_exists('PHPUnit_Util_ErrorHandler', $autoload) ? 'PHPUnit_Util_ErrorHandler' : 'PHPUnit\Util\ErrorHandler';
-                $autoload = false;
-
-                return $ErrorHandler::handleError($type, $msg, $file, $line, $context);
+                return \call_user_func(self::getPhpUnitErrorHandler(), $type, $msg, $file, $line, $context);
             }
 
-            $deprecations[] = [error_reporting(), $msg, $file];
+            $filesStack = [];
+            foreach (debug_backtrace() as $frame) {
+                if (!isset($frame['file']) || \in_array($frame['function'], ['require', 'require_once', 'include', 'include_once'], true)) {
+                    continue;
+                }
+
+                $filesStack[] = $frame['file'];
+            }
+
+            $deprecations[] = [error_reporting(), $msg, $file, $filesStack];
+
+            return null;
         });
 
         register_shutdown_function(function () use ($outputFile, &$deprecations) {
@@ -121,13 +123,14 @@ class DeprecationErrorHandler
      */
     public function handleError($type, $msg, $file, $line, $context = [])
     {
-        if ((E_USER_DEPRECATED !== $type && E_DEPRECATED !== $type) || !$this->getConfiguration()->isEnabled()) {
-            $ErrorHandler = self::$utilPrefix.'ErrorHandler';
-
-            return $ErrorHandler::handleError($type, $msg, $file, $line, $context);
+        if ((E_USER_DEPRECATED !== $type && E_DEPRECATED !== $type && (E_WARNING !== $type || false === strpos($msg, '" targeting switch is equivalent to "break'))) || !$this->getConfiguration()->isEnabled()) {
+            return \call_user_func(self::getPhpUnitErrorHandler(), $type, $msg, $file, $line, $context);
         }
 
         $deprecation = new Deprecation($msg, debug_backtrace(), $file);
+        if ($deprecation->isMuted()) {
+            return null;
+        }
         $group = 'other';
 
         if ($deprecation->originatesFromAnObject()) {
@@ -137,7 +140,7 @@ class DeprecationErrorHandler
 
             if (0 !== error_reporting()) {
                 $group = 'unsilenced';
-            } elseif ($deprecation->isLegacy(self::$utilPrefix)) {
+            } elseif ($deprecation->isLegacy()) {
                 $group = 'legacy';
             } else {
                 $group = [
@@ -165,6 +168,8 @@ class DeprecationErrorHandler
         }
 
         ++$this->deprecations[$group.'Count'];
+
+        return null;
     }
 
     /**
@@ -178,6 +183,9 @@ class DeprecationErrorHandler
             return;
         }
 
+        if (class_exists(DebugClassLoader::class, false)) {
+            DebugClassLoader::checkClasses();
+        }
         $currErrorHandler = set_error_handler('var_dump');
         restore_error_handler();
 
@@ -235,13 +243,6 @@ class DeprecationErrorHandler
         }
         if ('weak' === $mode) {
             return $this->configuration = Configuration::inWeakMode();
-        }
-        if (self::MODE_WEAK_VENDORS === $mode) {
-            ++$this->deprecations['remaining directCount'];
-            $msg = sprintf('Setting SYMFONY_DEPRECATIONS_HELPER to "%s" is deprecated in favor of "max[self]=0"', $mode);
-            $ref = &$this->deprecations['remaining direct'][$msg]['count'];
-            ++$ref;
-            $mode = 'max[self]=0';
         }
         if (isset($mode[0]) && '/' === $mode[0]) {
             return $this->configuration = Configuration::fromRegex($mode);
@@ -316,6 +317,29 @@ class DeprecationErrorHandler
         }
     }
 
+    private static function getPhpUnitErrorHandler()
+    {
+        if (!isset(self::$isAtLeastPhpUnit83)) {
+            self::$isAtLeastPhpUnit83 = class_exists('PHPUnit\Util\ErrorHandler') && method_exists('PHPUnit\Util\ErrorHandler', '__invoke');
+        }
+        if (!self::$isAtLeastPhpUnit83) {
+            return 'PHPUnit\Util\ErrorHandler::handleError';
+        }
+
+        foreach (debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS) as $frame) {
+            if (isset($frame['object']) && $frame['object'] instanceof TestResult) {
+                return new ErrorHandler(
+                    $frame['object']->getConvertDeprecationsToExceptions(),
+                    $frame['object']->getConvertErrorsToExceptions(),
+                    $frame['object']->getConvertNoticesToExceptions(),
+                    $frame['object']->getConvertWarningsToExceptions()
+                );
+            }
+        }
+
+        return function () { return false; };
+    }
+
     /**
      * Returns true if STDOUT is defined and supports colorization.
      *
@@ -327,6 +351,11 @@ class DeprecationErrorHandler
     private static function hasColorSupport()
     {
         if (!\defined('STDOUT')) {
+            return false;
+        }
+
+        // Follow https://no-color.org/
+        if (isset($_SERVER['NO_COLOR']) || false !== getenv('NO_COLOR')) {
             return false;
         }
 

@@ -62,6 +62,7 @@ class VichFileType extends AbstractType
     {
         $resolver->setDefaults([
             'allow_delete' => true,
+            'asset_helper' => false,
             'download_link' => null,
             'download_uri' => true,
             //TODO: use 'form.label.download'
@@ -72,12 +73,13 @@ class VichFileType extends AbstractType
         ]);
 
         $resolver->setAllowedTypes('allow_delete', 'bool');
+        $resolver->setAllowedTypes('asset_helper', 'bool');
         $resolver->setAllowedTypes('download_link', ['null', 'bool']);
         $resolver->setAllowedTypes('download_uri', ['bool', 'string', 'callable']);
         $resolver->setAllowedTypes('download_label', ['bool', 'string', 'callable', PropertyPath::class]);
         $resolver->setAllowedTypes('error_bubbling', 'bool');
 
-        $downloadUriNormalizer = function (Options $options, $downloadUri) {
+        $downloadUriNormalizer = static function (Options $options, $downloadUri) {
             if (null !== $options['download_link']) {
                 @\trigger_error('The "download_link" option is deprecated since version 1.6 and will be removed in 2.0. You should use "download_uri" instead.', E_USER_DEPRECATED);
 
@@ -158,6 +160,8 @@ class VichFileType extends AbstractType
                 $this->resolveDownloadLabel($options['download_label'], $object, $form)
             );
         }
+
+        $view->vars['asset_helper'] = $options['asset_helper'];
     }
 
     public function getBlockPrefix(): string

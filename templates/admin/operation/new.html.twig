@@ -3,9 +3,9 @@
 {% block title %}New Operation{% endblock %}
 
 {% block body %}
-    <h1>Create new Operation</h1>
+    <h1>{{ configs.site.libelle.currentTitle }}</h1>
 
-    {{ include('admin_operation/_form.html.twig') }}
+    {{ include('admin/operation/_form.html.twig') }}
 
     <a href="{{ path('admin_operation_index') }}">back to list</a>
 {% endblock %}
